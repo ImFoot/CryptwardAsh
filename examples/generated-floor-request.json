@@ -1,0 +1,9 @@
+{
+  "kind": "generated",
+  "mode": "expedition",
+  "seed": 4701,
+  "generatorVersion": "ashvault-gen-1.0.0",
+  "biome": "ashvault",
+  "difficulty": 1,
+  "recipe": "key_and_three_shards"
+}

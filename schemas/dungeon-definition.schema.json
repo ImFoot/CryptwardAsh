@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cryptward DungeonDefinition",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "displayName",
+    "source",
+    "biome",
+    "tileSize",
+    "width",
+    "height",
+    "layers",
+    "rooms",
+    "connections",
+    "objects",
+    "progression"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "source": {
+      "enum": [
+        "authored",
+        "generated"
+      ]
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "generatorVersion": {
+      "type": "string"
+    },
+    "biome": {
+      "const": "ashvault"
+    },
+    "tileSize": {
+      "const": 32
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "layers": {
+      "type": "object",
+      "required": [
+        "ground",
+        "walls",
+        "collision",
+        "decoration",
+        "zones"
+      ]
+    },
+    "rooms": {
+      "type": "array",
+      "minItems": 1
+    },
+    "connections": {
+      "type": "array"
+    },
+    "objects": {
+      "type": "array"
+    },
+    "progression": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

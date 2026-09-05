@@ -1,0 +1,60 @@
+{
+  "game": {
+    "title": "Cryptward: The Ashvault",
+    "logicalWidth": 390,
+    "logicalHeight": 844,
+    "worldTileSize": 32,
+    "targetFps": 60,
+    "orientation": "portrait-preferred"
+  },
+  "player": {
+    "maxHealth": 100,
+    "maxEmber": 100,
+    "moveSpeed": 128,
+    "dashSpeed": 315,
+    "dashMs": 180,
+    "dashCooldownMs": 1800,
+    "attackCadenceMs": 520,
+    "attackRange": 58,
+    "autoAimRange": 210,
+    "autoAimConeDegrees": 110,
+    "baseDamage": 14,
+    "invulnerabilityMs": 420
+  },
+  "pressure": {
+    "emberDrainPerSecond": 0.22,
+    "emberDamagePerSecondAtZero": 1.5,
+    "healthTonicSmall": 20,
+    "healthTonicLarge": 45,
+    "checkpointRefill": 35
+  },
+  "controls": {
+    "deadZonePx": 12,
+    "maxStickRadiusPx": 62,
+    "flickVelocityThreshold": 850,
+    "tapMaxMs": 180,
+    "interactHoldMs": 350,
+    "aimMemoryMs": 900
+  },
+  "camera": {
+    "deadZoneWidth": 70,
+    "deadZoneHeight": 110,
+    "lerpX": 0.14,
+    "lerpY": 0.14,
+    "zoomMobile": 1.12,
+    "zoomDesktop": 1.0
+  },
+  "scoring": {
+    "ashRat": 50,
+    "bonebound": 90,
+    "cinderAcolyte": 120,
+    "furnaceBrute": 250,
+    "emberNest": 400,
+    "boss": 2500,
+    "coin": 10,
+    "sealShard": 500,
+    "noDeathBonus": 2000,
+    "parTimeSeconds": 840,
+    "parTimeBonusPerSecond": 5
+  }
+}

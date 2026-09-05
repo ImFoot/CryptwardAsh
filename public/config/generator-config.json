@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "ashvault-gen-1.0.0",
+  "biome": "ashvault",
+  "tileSize": 32,
+  "targetGenerationMsP95": 50,
+  "attempts": 8,
+  "fallbackSeeds": [
+    4701,
+    198607,
+    731942
+  ],
+  "layout": {
+    "coarseCellTiles": 20,
+    "corridorWidthTiles": 3,
+    "maxCorridorTiles": 28,
+    "maxWidthTiles": 96,
+    "maxHeightTiles": 96
+  },
+  "graph": {
+    "minRooms": 9,
+    "maxRooms": 13,
+    "criticalPathMin": 6,
+    "criticalPathMax": 9,
+    "branchesMin": 1,
+    "branchesMax": 2,
+    "loopsMin": 1,
+    "loopsMax": 1,
+    "maxRewardedDeadEnds": 2,
+    "checkpointDepthMin": 0.55,
+    "checkpointDepthMax": 0.7
+  },
+  "encounters": {
+    "baseBudget": 4,
+    "budgetPerDepth": 1.5,
+    "jitterMin": -2,
+    "jitterMax": 2,
+    "globalEnemyCapMobile": 24,
+    "maxConsecutiveHighIntensity": 2,
+    "costs": {
+      "ash_rat": 1,
+      "bonebound": 2,
+      "cinder_acolyte": 3,
+      "trap_group_minor": 2,
+      "ember_nest": 5,
+      "furnace_brute": 6,
+      "elite_modifier": 3
+    }
+  },
+  "safety": {
+    "entranceClearTiles": 2,
+    "playerEnemyClearTiles": 4,
+    "objectiveClearTiles": 2,
+    "minCombatOpenTiles": 28
+  },
+  "progressionRecipe": "key_and_three_shards"
+}

@@ -1,0 +1,1784 @@
+{
+  "game": "Cryptward: The Ashvault",
+  "license_note": "Original project assets created for this handoff. No Gauntlet art, names, maps, audio, or protected trade dress are included.",
+  "runtime_scale": {
+    "world_tile_px": 32,
+    "hero_display_px": [
+      64,
+      64
+    ],
+    "standard_enemy_display_px": [
+      64,
+      64
+    ],
+    "boss_display_px": [
+      112,
+      112
+    ]
+  },
+  "atlases": {
+    "dungeon_runtime": {
+      "file": "assets/atlases/dungeon_tiles_runtime_8x8_32.png",
+      "columns": 8,
+      "rows": 8,
+      "frameWidth": 32,
+      "frameHeight": 32
+    },
+    "dungeon_hd": {
+      "file": "assets/atlases/dungeon_tiles_hd_8x8_128.png",
+      "columns": 8,
+      "rows": 8,
+      "frameWidth": 128,
+      "frameHeight": 128
+    },
+    "hero": {
+      "file": "assets/atlases/ash_warden_8x6_192.png",
+      "columns": 8,
+      "rows": 6,
+      "frameWidth": 192,
+      "frameHeight": 192
+    },
+    "enemies": {
+      "file": "assets/atlases/enemies_6x6_256.png",
+      "columns": 6,
+      "rows": 6,
+      "frameWidth": 256,
+      "frameHeight": 256
+    },
+    "items_ui": {
+      "file": "assets/atlases/items_ui_8x6_192.png",
+      "columns": 8,
+      "rows": 6,
+      "frameWidth": 192,
+      "frameHeight": 192
+    },
+    "effects": {
+      "file": "assets/atlases/effects_8x6_192.png",
+      "columns": 8,
+      "rows": 6,
+      "frameWidth": 192,
+      "frameHeight": 192
+    }
+  },
+  "frames": {
+    "dungeon": [
+      {
+        "name": "floor_slab_a",
+        "index": 0,
+        "row": 0,
+        "column": 0,
+        "file": "assets/frames/dungeon/floor_slab_a.png"
+      },
+      {
+        "name": "floor_cracked_a",
+        "index": 1,
+        "row": 0,
+        "column": 1,
+        "file": "assets/frames/dungeon/floor_cracked_a.png"
+      },
+      {
+        "name": "floor_slab_b",
+        "index": 2,
+        "row": 0,
+        "column": 2,
+        "file": "assets/frames/dungeon/floor_slab_b.png"
+      },
+      {
+        "name": "floor_ember_cracks",
+        "index": 3,
+        "row": 0,
+        "column": 3,
+        "file": "assets/frames/dungeon/floor_ember_cracks.png"
+      },
+      {
+        "name": "floor_brass_plate",
+        "index": 4,
+        "row": 0,
+        "column": 4,
+        "file": "assets/frames/dungeon/floor_brass_plate.png"
+      },
+      {
+        "name": "floor_ember_grate",
+        "index": 5,
+        "row": 0,
+        "column": 5,
+        "file": "assets/frames/dungeon/floor_ember_grate.png"
+      },
+      {
+        "name": "floor_rubble_a",
+        "index": 6,
+        "row": 0,
+        "column": 6,
+        "file": "assets/frames/dungeon/floor_rubble_a.png"
+      },
+      {
+        "name": "floor_lava_cracks",
+        "index": 7,
+        "row": 0,
+        "column": 7,
+        "file": "assets/frames/dungeon/floor_lava_cracks.png"
+      },
+      {
+        "name": "wall_straight",
+        "index": 8,
+        "row": 1,
+        "column": 0,
+        "file": "assets/frames/dungeon/wall_straight.png"
+      },
+      {
+        "name": "wall_inner_corner",
+        "index": 9,
+        "row": 1,
+        "column": 1,
+        "file": "assets/frames/dungeon/wall_inner_corner.png"
+      },
+      {
+        "name": "wall_outer_corner",
+        "index": 10,
+        "row": 1,
+        "column": 2,
+        "file": "assets/frames/dungeon/wall_outer_corner.png"
+      },
+      {
+        "name": "wall_t_junction",
+        "index": 11,
+        "row": 1,
+        "column": 3,
+        "file": "assets/frames/dungeon/wall_t_junction.png"
+      },
+      {
+        "name": "wall_torch",
+        "index": 12,
+        "row": 1,
+        "column": 4,
+        "file": "assets/frames/dungeon/wall_torch.png"
+      },
+      {
+        "name": "wall_rubble",
+        "index": 13,
+        "row": 1,
+        "column": 5,
+        "file": "assets/frames/dungeon/wall_rubble.png"
+      },
+      {
+        "name": "wall_banner_sun",
+        "index": 14,
+        "row": 1,
+        "column": 6,
+        "file": "assets/frames/dungeon/wall_banner_sun.png"
+      },
+      {
+        "name": "wall_banner_skull",
+        "index": 15,
+        "row": 1,
+        "column": 7,
+        "file": "assets/frames/dungeon/wall_banner_skull.png"
+      },
+      {
+        "name": "door_closed_wood",
+        "index": 16,
+        "row": 2,
+        "column": 0,
+        "file": "assets/frames/dungeon/door_closed_wood.png"
+      },
+      {
+        "name": "door_open_arch",
+        "index": 17,
+        "row": 2,
+        "column": 1,
+        "file": "assets/frames/dungeon/door_open_arch.png"
+      },
+      {
+        "name": "gate_iron",
+        "index": 18,
+        "row": 2,
+        "column": 2,
+        "file": "assets/frames/dungeon/gate_iron.png"
+      },
+      {
+        "name": "gate_locked",
+        "index": 19,
+        "row": 2,
+        "column": 3,
+        "file": "assets/frames/dungeon/gate_locked.png"
+      },
+      {
+        "name": "door_double_closed",
+        "index": 20,
+        "row": 2,
+        "column": 4,
+        "file": "assets/frames/dungeon/door_double_closed.png"
+      },
+      {
+        "name": "door_double_open",
+        "index": 21,
+        "row": 2,
+        "column": 5,
+        "file": "assets/frames/dungeon/door_double_open.png"
+      },
+      {
+        "name": "wall_brick",
+        "index": 22,
+        "row": 2,
+        "column": 6,
+        "file": "assets/frames/dungeon/wall_brick.png"
+      },
+      {
+        "name": "wall_brick_cracked",
+        "index": 23,
+        "row": 2,
+        "column": 7,
+        "file": "assets/frames/dungeon/wall_brick_cracked.png"
+      },
+      {
+        "name": "stairs_down",
+        "index": 24,
+        "row": 3,
+        "column": 0,
+        "file": "assets/frames/dungeon/stairs_down.png"
+      },
+      {
+        "name": "pit_square",
+        "index": 25,
+        "row": 3,
+        "column": 1,
+        "file": "assets/frames/dungeon/pit_square.png"
+      },
+      {
+        "name": "bridge_chain",
+        "index": 26,
+        "row": 3,
+        "column": 2,
+        "file": "assets/frames/dungeon/bridge_chain.png"
+      },
+      {
+        "name": "lava_pool",
+        "index": 27,
+        "row": 3,
+        "column": 3,
+        "file": "assets/frames/dungeon/lava_pool.png"
+      },
+      {
+        "name": "grate_hot",
+        "index": 28,
+        "row": 3,
+        "column": 4,
+        "file": "assets/frames/dungeon/grate_hot.png"
+      },
+      {
+        "name": "bone_pile_floor",
+        "index": 29,
+        "row": 3,
+        "column": 5,
+        "file": "assets/frames/dungeon/bone_pile_floor.png"
+      },
+      {
+        "name": "rubble_large",
+        "index": 30,
+        "row": 3,
+        "column": 6,
+        "file": "assets/frames/dungeon/rubble_large.png"
+      },
+      {
+        "name": "column_teal",
+        "index": 31,
+        "row": 3,
+        "column": 7,
+        "file": "assets/frames/dungeon/column_teal.png"
+      },
+      {
+        "name": "column_brass",
+        "index": 32,
+        "row": 4,
+        "column": 0,
+        "file": "assets/frames/dungeon/column_brass.png"
+      },
+      {
+        "name": "column_broken",
+        "index": 33,
+        "row": 4,
+        "column": 1,
+        "file": "assets/frames/dungeon/column_broken.png"
+      },
+      {
+        "name": "pedestal_switch",
+        "index": 34,
+        "row": 4,
+        "column": 2,
+        "file": "assets/frames/dungeon/pedestal_switch.png"
+      },
+      {
+        "name": "brazier_column",
+        "index": 35,
+        "row": 4,
+        "column": 3,
+        "file": "assets/frames/dungeon/brazier_column.png"
+      },
+      {
+        "name": "torch_single",
+        "index": 36,
+        "row": 4,
+        "column": 4,
+        "file": "assets/frames/dungeon/torch_single.png"
+      },
+      {
+        "name": "torch_triple",
+        "index": 37,
+        "row": 4,
+        "column": 5,
+        "file": "assets/frames/dungeon/torch_triple.png"
+      },
+      {
+        "name": "rubble_heap",
+        "index": 38,
+        "row": 4,
+        "column": 6,
+        "file": "assets/frames/dungeon/rubble_heap.png"
+      },
+      {
+        "name": "fallen_column",
+        "index": 39,
+        "row": 4,
+        "column": 7,
+        "file": "assets/frames/dungeon/fallen_column.png"
+      },
+      {
+        "name": "carpet_straight",
+        "index": 40,
+        "row": 5,
+        "column": 0,
+        "file": "assets/frames/dungeon/carpet_straight.png"
+      },
+      {
+        "name": "carpet_cross",
+        "index": 41,
+        "row": 5,
+        "column": 1,
+        "file": "assets/frames/dungeon/carpet_cross.png"
+      },
+      {
+        "name": "floor_brass_wheel",
+        "index": 42,
+        "row": 5,
+        "column": 2,
+        "file": "assets/frames/dungeon/floor_brass_wheel.png"
+      },
+      {
+        "name": "ritual_rune_ember",
+        "index": 43,
+        "row": 5,
+        "column": 3,
+        "file": "assets/frames/dungeon/ritual_rune_ember.png"
+      },
+      {
+        "name": "altar_table",
+        "index": 44,
+        "row": 5,
+        "column": 4,
+        "file": "assets/frames/dungeon/altar_table.png"
+      },
+      {
+        "name": "boss_floor_skull",
+        "index": 45,
+        "row": 5,
+        "column": 5,
+        "file": "assets/frames/dungeon/boss_floor_skull.png"
+      },
+      {
+        "name": "floor_brass_diamond",
+        "index": 46,
+        "row": 5,
+        "column": 6,
+        "file": "assets/frames/dungeon/floor_brass_diamond.png"
+      },
+      {
+        "name": "floor_teal_ring",
+        "index": 47,
+        "row": 5,
+        "column": 7,
+        "file": "assets/frames/dungeon/floor_teal_ring.png"
+      },
+      {
+        "name": "floor_diamond_inlay",
+        "index": 48,
+        "row": 6,
+        "column": 0,
+        "file": "assets/frames/dungeon/floor_diamond_inlay.png"
+      },
+      {
+        "name": "floor_checker",
+        "index": 49,
+        "row": 6,
+        "column": 1,
+        "file": "assets/frames/dungeon/floor_checker.png"
+      },
+      {
+        "name": "drain_iron",
+        "index": 50,
+        "row": 6,
+        "column": 2,
+        "file": "assets/frames/dungeon/drain_iron.png"
+      },
+      {
+        "name": "floor_teal_cracks",
+        "index": 51,
+        "row": 6,
+        "column": 3,
+        "file": "assets/frames/dungeon/floor_teal_cracks.png"
+      },
+      {
+        "name": "debris_small",
+        "index": 52,
+        "row": 6,
+        "column": 4,
+        "file": "assets/frames/dungeon/debris_small.png"
+      },
+      {
+        "name": "bones_scattered",
+        "index": 53,
+        "row": 6,
+        "column": 5,
+        "file": "assets/frames/dungeon/bones_scattered.png"
+      },
+      {
+        "name": "blood_stain",
+        "index": 54,
+        "row": 6,
+        "column": 6,
+        "file": "assets/frames/dungeon/blood_stain.png"
+      },
+      {
+        "name": "web_corner",
+        "index": 55,
+        "row": 6,
+        "column": 7,
+        "file": "assets/frames/dungeon/web_corner.png"
+      },
+      {
+        "name": "exit_portal",
+        "index": 56,
+        "row": 7,
+        "column": 0,
+        "file": "assets/frames/dungeon/exit_portal.png"
+      },
+      {
+        "name": "checkpoint_rune",
+        "index": 57,
+        "row": 7,
+        "column": 1,
+        "file": "assets/frames/dungeon/checkpoint_rune.png"
+      },
+      {
+        "name": "boss_seal",
+        "index": 58,
+        "row": 7,
+        "column": 2,
+        "file": "assets/frames/dungeon/boss_seal.png"
+      },
+      {
+        "name": "grate_mesh",
+        "index": 59,
+        "row": 7,
+        "column": 3,
+        "file": "assets/frames/dungeon/grate_mesh.png"
+      },
+      {
+        "name": "spike_trap",
+        "index": 60,
+        "row": 7,
+        "column": 4,
+        "file": "assets/frames/dungeon/spike_trap.png"
+      },
+      {
+        "name": "lava_edge",
+        "index": 61,
+        "row": 7,
+        "column": 5,
+        "file": "assets/frames/dungeon/lava_edge.png"
+      },
+      {
+        "name": "chain_lock",
+        "index": 62,
+        "row": 7,
+        "column": 6,
+        "file": "assets/frames/dungeon/chain_lock.png"
+      },
+      {
+        "name": "secret_ember_crack",
+        "index": 63,
+        "row": 7,
+        "column": 7,
+        "file": "assets/frames/dungeon/secret_ember_crack.png"
+      }
+    ],
+    "hero": [
+      {
+        "name": "idle_south",
+        "index": 0,
+        "row": 0,
+        "column": 0,
+        "file": "assets/frames/hero/idle_south.png"
+      },
+      {
+        "name": "idle_east",
+        "index": 1,
+        "row": 0,
+        "column": 1,
+        "file": "assets/frames/hero/idle_east.png"
+      },
+      {
+        "name": "idle_north",
+        "index": 2,
+        "row": 0,
+        "column": 2,
+        "file": "assets/frames/hero/idle_north.png"
+      },
+      {
+        "name": "idle_west",
+        "index": 3,
+        "row": 0,
+        "column": 3,
+        "file": "assets/frames/hero/idle_west.png"
+      },
+      {
+        "name": "idle_breathe_01",
+        "index": 4,
+        "row": 0,
+        "column": 4,
+        "file": "assets/frames/hero/idle_breathe_01.png"
+      },
+      {
+        "name": "idle_breathe_02",
+        "index": 5,
+        "row": 0,
+        "column": 5,
+        "file": "assets/frames/hero/idle_breathe_02.png"
+      },
+      {
+        "name": "idle_breathe_03",
+        "index": 6,
+        "row": 0,
+        "column": 6,
+        "file": "assets/frames/hero/idle_breathe_03.png"
+      },
+      {
+        "name": "idle_breathe_04",
+        "index": 7,
+        "row": 0,
+        "column": 7,
+        "file": "assets/frames/hero/idle_breathe_04.png"
+      },
+      {
+        "name": "walk_dir_01",
+        "index": 8,
+        "row": 1,
+        "column": 0,
+        "file": "assets/frames/hero/walk_dir_01.png"
+      },
+      {
+        "name": "walk_dir_02",
+        "index": 9,
+        "row": 1,
+        "column": 1,
+        "file": "assets/frames/hero/walk_dir_02.png"
+      },
+      {
+        "name": "walk_dir_03",
+        "index": 10,
+        "row": 1,
+        "column": 2,
+        "file": "assets/frames/hero/walk_dir_03.png"
+      },
+      {
+        "name": "walk_dir_04",
+        "index": 11,
+        "row": 1,
+        "column": 3,
+        "file": "assets/frames/hero/walk_dir_04.png"
+      },
+      {
+        "name": "walk_dir_05",
+        "index": 12,
+        "row": 1,
+        "column": 4,
+        "file": "assets/frames/hero/walk_dir_05.png"
+      },
+      {
+        "name": "walk_dir_06",
+        "index": 13,
+        "row": 1,
+        "column": 5,
+        "file": "assets/frames/hero/walk_dir_06.png"
+      },
+      {
+        "name": "walk_dir_07",
+        "index": 14,
+        "row": 1,
+        "column": 6,
+        "file": "assets/frames/hero/walk_dir_07.png"
+      },
+      {
+        "name": "walk_dir_08",
+        "index": 15,
+        "row": 1,
+        "column": 7,
+        "file": "assets/frames/hero/walk_dir_08.png"
+      },
+      {
+        "name": "walk_alt_01",
+        "index": 16,
+        "row": 2,
+        "column": 0,
+        "file": "assets/frames/hero/walk_alt_01.png"
+      },
+      {
+        "name": "walk_alt_02",
+        "index": 17,
+        "row": 2,
+        "column": 1,
+        "file": "assets/frames/hero/walk_alt_02.png"
+      },
+      {
+        "name": "walk_alt_03",
+        "index": 18,
+        "row": 2,
+        "column": 2,
+        "file": "assets/frames/hero/walk_alt_03.png"
+      },
+      {
+        "name": "walk_alt_04",
+        "index": 19,
+        "row": 2,
+        "column": 3,
+        "file": "assets/frames/hero/walk_alt_04.png"
+      },
+      {
+        "name": "walk_alt_05",
+        "index": 20,
+        "row": 2,
+        "column": 4,
+        "file": "assets/frames/hero/walk_alt_05.png"
+      },
+      {
+        "name": "walk_alt_06",
+        "index": 21,
+        "row": 2,
+        "column": 5,
+        "file": "assets/frames/hero/walk_alt_06.png"
+      },
+      {
+        "name": "walk_alt_07",
+        "index": 22,
+        "row": 2,
+        "column": 6,
+        "file": "assets/frames/hero/walk_alt_07.png"
+      },
+      {
+        "name": "walk_alt_08",
+        "index": 23,
+        "row": 2,
+        "column": 7,
+        "file": "assets/frames/hero/walk_alt_08.png"
+      },
+      {
+        "name": "attack_01",
+        "index": 24,
+        "row": 3,
+        "column": 0,
+        "file": "assets/frames/hero/attack_01.png"
+      },
+      {
+        "name": "attack_02",
+        "index": 25,
+        "row": 3,
+        "column": 1,
+        "file": "assets/frames/hero/attack_02.png"
+      },
+      {
+        "name": "attack_03",
+        "index": 26,
+        "row": 3,
+        "column": 2,
+        "file": "assets/frames/hero/attack_03.png"
+      },
+      {
+        "name": "attack_04",
+        "index": 27,
+        "row": 3,
+        "column": 3,
+        "file": "assets/frames/hero/attack_04.png"
+      },
+      {
+        "name": "attack_05",
+        "index": 28,
+        "row": 3,
+        "column": 4,
+        "file": "assets/frames/hero/attack_05.png"
+      },
+      {
+        "name": "attack_06",
+        "index": 29,
+        "row": 3,
+        "column": 5,
+        "file": "assets/frames/hero/attack_06.png"
+      },
+      {
+        "name": "attack_07",
+        "index": 30,
+        "row": 3,
+        "column": 6,
+        "file": "assets/frames/hero/attack_07.png"
+      },
+      {
+        "name": "attack_08",
+        "index": 31,
+        "row": 3,
+        "column": 7,
+        "file": "assets/frames/hero/attack_08.png"
+      },
+      {
+        "name": "hit",
+        "index": 32,
+        "row": 4,
+        "column": 0,
+        "file": "assets/frames/hero/hit.png"
+      },
+      {
+        "name": "stagger",
+        "index": 33,
+        "row": 4,
+        "column": 1,
+        "file": "assets/frames/hero/stagger.png"
+      },
+      {
+        "name": "knockdown",
+        "index": 34,
+        "row": 4,
+        "column": 2,
+        "file": "assets/frames/hero/knockdown.png"
+      },
+      {
+        "name": "defeat",
+        "index": 35,
+        "row": 4,
+        "column": 3,
+        "file": "assets/frames/hero/defeat.png"
+      },
+      {
+        "name": "revive",
+        "index": 36,
+        "row": 4,
+        "column": 4,
+        "file": "assets/frames/hero/revive.png"
+      },
+      {
+        "name": "interact",
+        "index": 37,
+        "row": 4,
+        "column": 5,
+        "file": "assets/frames/hero/interact.png"
+      },
+      {
+        "name": "use_key",
+        "index": 38,
+        "row": 4,
+        "column": 6,
+        "file": "assets/frames/hero/use_key.png"
+      },
+      {
+        "name": "victory",
+        "index": 39,
+        "row": 4,
+        "column": 7,
+        "file": "assets/frames/hero/victory.png"
+      },
+      {
+        "name": "cast_ember",
+        "index": 40,
+        "row": 5,
+        "column": 0,
+        "file": "assets/frames/hero/cast_ember.png"
+      },
+      {
+        "name": "guard",
+        "index": 41,
+        "row": 5,
+        "column": 1,
+        "file": "assets/frames/hero/guard.png"
+      },
+      {
+        "name": "dash",
+        "index": 42,
+        "row": 5,
+        "column": 2,
+        "file": "assets/frames/hero/dash.png"
+      },
+      {
+        "name": "pickup",
+        "index": 43,
+        "row": 5,
+        "column": 3,
+        "file": "assets/frames/hero/pickup.png"
+      },
+      {
+        "name": "drink_potion",
+        "index": 44,
+        "row": 5,
+        "column": 4,
+        "file": "assets/frames/hero/drink_potion.png"
+      },
+      {
+        "name": "hurt_flash",
+        "index": 45,
+        "row": 5,
+        "column": 5,
+        "file": "assets/frames/hero/hurt_flash.png"
+      },
+      {
+        "name": "portal_entry",
+        "index": 46,
+        "row": 5,
+        "column": 6,
+        "file": "assets/frames/hero/portal_entry.png"
+      },
+      {
+        "name": "neutral_pose",
+        "index": 47,
+        "row": 5,
+        "column": 7,
+        "file": "assets/frames/hero/neutral_pose.png"
+      }
+    ],
+    "enemies": [
+      {
+        "name": "ash_rat_idle",
+        "index": 0,
+        "row": 0,
+        "column": 0,
+        "file": "assets/frames/enemies/ash_rat_idle.png"
+      },
+      {
+        "name": "ash_rat_move_01",
+        "index": 1,
+        "row": 0,
+        "column": 1,
+        "file": "assets/frames/enemies/ash_rat_move_01.png"
+      },
+      {
+        "name": "ash_rat_move_02",
+        "index": 2,
+        "row": 0,
+        "column": 2,
+        "file": "assets/frames/enemies/ash_rat_move_02.png"
+      },
+      {
+        "name": "ash_rat_attack",
+        "index": 3,
+        "row": 0,
+        "column": 3,
+        "file": "assets/frames/enemies/ash_rat_attack.png"
+      },
+      {
+        "name": "ash_rat_hit",
+        "index": 4,
+        "row": 0,
+        "column": 4,
+        "file": "assets/frames/enemies/ash_rat_hit.png"
+      },
+      {
+        "name": "ash_rat_defeat",
+        "index": 5,
+        "row": 0,
+        "column": 5,
+        "file": "assets/frames/enemies/ash_rat_defeat.png"
+      },
+      {
+        "name": "bonebound_idle",
+        "index": 6,
+        "row": 1,
+        "column": 0,
+        "file": "assets/frames/enemies/bonebound_idle.png"
+      },
+      {
+        "name": "bonebound_move_01",
+        "index": 7,
+        "row": 1,
+        "column": 1,
+        "file": "assets/frames/enemies/bonebound_move_01.png"
+      },
+      {
+        "name": "bonebound_move_02",
+        "index": 8,
+        "row": 1,
+        "column": 2,
+        "file": "assets/frames/enemies/bonebound_move_02.png"
+      },
+      {
+        "name": "bonebound_attack",
+        "index": 9,
+        "row": 1,
+        "column": 3,
+        "file": "assets/frames/enemies/bonebound_attack.png"
+      },
+      {
+        "name": "bonebound_hit",
+        "index": 10,
+        "row": 1,
+        "column": 4,
+        "file": "assets/frames/enemies/bonebound_hit.png"
+      },
+      {
+        "name": "bonebound_defeat",
+        "index": 11,
+        "row": 1,
+        "column": 5,
+        "file": "assets/frames/enemies/bonebound_defeat.png"
+      },
+      {
+        "name": "cinder_acolyte_idle",
+        "index": 12,
+        "row": 2,
+        "column": 0,
+        "file": "assets/frames/enemies/cinder_acolyte_idle.png"
+      },
+      {
+        "name": "cinder_acolyte_move_01",
+        "index": 13,
+        "row": 2,
+        "column": 1,
+        "file": "assets/frames/enemies/cinder_acolyte_move_01.png"
+      },
+      {
+        "name": "cinder_acolyte_move_02",
+        "index": 14,
+        "row": 2,
+        "column": 2,
+        "file": "assets/frames/enemies/cinder_acolyte_move_02.png"
+      },
+      {
+        "name": "cinder_acolyte_attack",
+        "index": 15,
+        "row": 2,
+        "column": 3,
+        "file": "assets/frames/enemies/cinder_acolyte_attack.png"
+      },
+      {
+        "name": "cinder_acolyte_hit",
+        "index": 16,
+        "row": 2,
+        "column": 4,
+        "file": "assets/frames/enemies/cinder_acolyte_hit.png"
+      },
+      {
+        "name": "cinder_acolyte_defeat",
+        "index": 17,
+        "row": 2,
+        "column": 5,
+        "file": "assets/frames/enemies/cinder_acolyte_defeat.png"
+      },
+      {
+        "name": "furnace_brute_idle",
+        "index": 18,
+        "row": 3,
+        "column": 0,
+        "file": "assets/frames/enemies/furnace_brute_idle.png"
+      },
+      {
+        "name": "furnace_brute_move_01",
+        "index": 19,
+        "row": 3,
+        "column": 1,
+        "file": "assets/frames/enemies/furnace_brute_move_01.png"
+      },
+      {
+        "name": "furnace_brute_move_02",
+        "index": 20,
+        "row": 3,
+        "column": 2,
+        "file": "assets/frames/enemies/furnace_brute_move_02.png"
+      },
+      {
+        "name": "furnace_brute_attack",
+        "index": 21,
+        "row": 3,
+        "column": 3,
+        "file": "assets/frames/enemies/furnace_brute_attack.png"
+      },
+      {
+        "name": "furnace_brute_hit",
+        "index": 22,
+        "row": 3,
+        "column": 4,
+        "file": "assets/frames/enemies/furnace_brute_hit.png"
+      },
+      {
+        "name": "furnace_brute_defeat",
+        "index": 23,
+        "row": 3,
+        "column": 5,
+        "file": "assets/frames/enemies/furnace_brute_defeat.png"
+      },
+      {
+        "name": "ember_nest_idle",
+        "index": 24,
+        "row": 4,
+        "column": 0,
+        "file": "assets/frames/enemies/ember_nest_idle.png"
+      },
+      {
+        "name": "ember_nest_move_01",
+        "index": 25,
+        "row": 4,
+        "column": 1,
+        "file": "assets/frames/enemies/ember_nest_move_01.png"
+      },
+      {
+        "name": "ember_nest_move_02",
+        "index": 26,
+        "row": 4,
+        "column": 2,
+        "file": "assets/frames/enemies/ember_nest_move_02.png"
+      },
+      {
+        "name": "ember_nest_attack",
+        "index": 27,
+        "row": 4,
+        "column": 3,
+        "file": "assets/frames/enemies/ember_nest_attack.png"
+      },
+      {
+        "name": "ember_nest_hit",
+        "index": 28,
+        "row": 4,
+        "column": 4,
+        "file": "assets/frames/enemies/ember_nest_hit.png"
+      },
+      {
+        "name": "ember_nest_defeat",
+        "index": 29,
+        "row": 4,
+        "column": 5,
+        "file": "assets/frames/enemies/ember_nest_defeat.png"
+      },
+      {
+        "name": "bellows_warden_idle",
+        "index": 30,
+        "row": 5,
+        "column": 0,
+        "file": "assets/frames/enemies/bellows_warden_idle.png"
+      },
+      {
+        "name": "bellows_warden_move_01",
+        "index": 31,
+        "row": 5,
+        "column": 1,
+        "file": "assets/frames/enemies/bellows_warden_move_01.png"
+      },
+      {
+        "name": "bellows_warden_move_02",
+        "index": 32,
+        "row": 5,
+        "column": 2,
+        "file": "assets/frames/enemies/bellows_warden_move_02.png"
+      },
+      {
+        "name": "bellows_warden_attack",
+        "index": 33,
+        "row": 5,
+        "column": 3,
+        "file": "assets/frames/enemies/bellows_warden_attack.png"
+      },
+      {
+        "name": "bellows_warden_hit",
+        "index": 34,
+        "row": 5,
+        "column": 4,
+        "file": "assets/frames/enemies/bellows_warden_hit.png"
+      },
+      {
+        "name": "bellows_warden_defeat",
+        "index": 35,
+        "row": 5,
+        "column": 5,
+        "file": "assets/frames/enemies/bellows_warden_defeat.png"
+      }
+    ],
+    "items_ui": [
+      {
+        "name": "health_tonic_small",
+        "index": 0,
+        "row": 0,
+        "column": 0,
+        "file": "assets/frames/items_ui/health_tonic_small.png"
+      },
+      {
+        "name": "health_tonic_large",
+        "index": 1,
+        "row": 0,
+        "column": 1,
+        "file": "assets/frames/items_ui/health_tonic_large.png"
+      },
+      {
+        "name": "brass_key",
+        "index": 2,
+        "row": 0,
+        "column": 2,
+        "file": "assets/frames/items_ui/brass_key.png"
+      },
+      {
+        "name": "coin_pile",
+        "index": 3,
+        "row": 0,
+        "column": 3,
+        "file": "assets/frames/items_ui/coin_pile.png"
+      },
+      {
+        "name": "teal_mana_shard",
+        "index": 4,
+        "row": 0,
+        "column": 4,
+        "file": "assets/frames/items_ui/teal_mana_shard.png"
+      },
+      {
+        "name": "ember_charge",
+        "index": 5,
+        "row": 0,
+        "column": 5,
+        "file": "assets/frames/items_ui/ember_charge.png"
+      },
+      {
+        "name": "shield_charm",
+        "index": 6,
+        "row": 0,
+        "column": 6,
+        "file": "assets/frames/items_ui/shield_charm.png"
+      },
+      {
+        "name": "score_relic",
+        "index": 7,
+        "row": 0,
+        "column": 7,
+        "file": "assets/frames/items_ui/score_relic.png"
+      },
+      {
+        "name": "chest_closed",
+        "index": 8,
+        "row": 1,
+        "column": 0,
+        "file": "assets/frames/items_ui/chest_closed.png"
+      },
+      {
+        "name": "chest_open",
+        "index": 9,
+        "row": 1,
+        "column": 1,
+        "file": "assets/frames/items_ui/chest_open.png"
+      },
+      {
+        "name": "urn_intact",
+        "index": 10,
+        "row": 1,
+        "column": 2,
+        "file": "assets/frames/items_ui/urn_intact.png"
+      },
+      {
+        "name": "urn_broken",
+        "index": 11,
+        "row": 1,
+        "column": 3,
+        "file": "assets/frames/items_ui/urn_broken.png"
+      },
+      {
+        "name": "lever_off",
+        "index": 12,
+        "row": 1,
+        "column": 4,
+        "file": "assets/frames/items_ui/lever_off.png"
+      },
+      {
+        "name": "lever_on",
+        "index": 13,
+        "row": 1,
+        "column": 5,
+        "file": "assets/frames/items_ui/lever_on.png"
+      },
+      {
+        "name": "pressure_plate",
+        "index": 14,
+        "row": 1,
+        "column": 6,
+        "file": "assets/frames/items_ui/pressure_plate.png"
+      },
+      {
+        "name": "checkpoint_brazier",
+        "index": 15,
+        "row": 1,
+        "column": 7,
+        "file": "assets/frames/items_ui/checkpoint_brazier.png"
+      },
+      {
+        "name": "bone_pile_prop",
+        "index": 16,
+        "row": 2,
+        "column": 0,
+        "file": "assets/frames/items_ui/bone_pile_prop.png"
+      },
+      {
+        "name": "hanging_chain",
+        "index": 17,
+        "row": 2,
+        "column": 1,
+        "file": "assets/frames/items_ui/hanging_chain.png"
+      },
+      {
+        "name": "barrel_broken",
+        "index": 18,
+        "row": 2,
+        "column": 2,
+        "file": "assets/frames/items_ui/barrel_broken.png"
+      },
+      {
+        "name": "iron_maiden",
+        "index": 19,
+        "row": 2,
+        "column": 3,
+        "file": "assets/frames/items_ui/iron_maiden.png"
+      },
+      {
+        "name": "weapon_rack",
+        "index": 20,
+        "row": 2,
+        "column": 4,
+        "file": "assets/frames/items_ui/weapon_rack.png"
+      },
+      {
+        "name": "mine_cart",
+        "index": 21,
+        "row": 2,
+        "column": 5,
+        "file": "assets/frames/items_ui/mine_cart.png"
+      },
+      {
+        "name": "warning_banner",
+        "index": 22,
+        "row": 2,
+        "column": 6,
+        "file": "assets/frames/items_ui/warning_banner.png"
+      },
+      {
+        "name": "small_forge",
+        "index": 23,
+        "row": 2,
+        "column": 7,
+        "file": "assets/frames/items_ui/small_forge.png"
+      },
+      {
+        "name": "hud_heart",
+        "index": 24,
+        "row": 3,
+        "column": 0,
+        "file": "assets/frames/items_ui/hud_heart.png"
+      },
+      {
+        "name": "hud_flame",
+        "index": 25,
+        "row": 3,
+        "column": 1,
+        "file": "assets/frames/items_ui/hud_flame.png"
+      },
+      {
+        "name": "hud_key",
+        "index": 26,
+        "row": 3,
+        "column": 2,
+        "file": "assets/frames/items_ui/hud_key.png"
+      },
+      {
+        "name": "hud_coin",
+        "index": 27,
+        "row": 3,
+        "column": 3,
+        "file": "assets/frames/items_ui/hud_coin.png"
+      },
+      {
+        "name": "hud_sword",
+        "index": 28,
+        "row": 3,
+        "column": 4,
+        "file": "assets/frames/items_ui/hud_sword.png"
+      },
+      {
+        "name": "hud_shield",
+        "index": 29,
+        "row": 3,
+        "column": 5,
+        "file": "assets/frames/items_ui/hud_shield.png"
+      },
+      {
+        "name": "hud_dash",
+        "index": 30,
+        "row": 3,
+        "column": 6,
+        "file": "assets/frames/items_ui/hud_dash.png"
+      },
+      {
+        "name": "hud_settings",
+        "index": 31,
+        "row": 3,
+        "column": 7,
+        "file": "assets/frames/items_ui/hud_settings.png"
+      },
+      {
+        "name": "status_poisoned",
+        "index": 32,
+        "row": 4,
+        "column": 0,
+        "file": "assets/frames/items_ui/status_poisoned.png"
+      },
+      {
+        "name": "status_burning",
+        "index": 33,
+        "row": 4,
+        "column": 1,
+        "file": "assets/frames/items_ui/status_burning.png"
+      },
+      {
+        "name": "status_slowed",
+        "index": 34,
+        "row": 4,
+        "column": 2,
+        "file": "assets/frames/items_ui/status_slowed.png"
+      },
+      {
+        "name": "status_shielded",
+        "index": 35,
+        "row": 4,
+        "column": 3,
+        "file": "assets/frames/items_ui/status_shielded.png"
+      },
+      {
+        "name": "status_attack_up",
+        "index": 36,
+        "row": 4,
+        "column": 4,
+        "file": "assets/frames/items_ui/status_attack_up.png"
+      },
+      {
+        "name": "status_speed_up",
+        "index": 37,
+        "row": 4,
+        "column": 5,
+        "file": "assets/frames/items_ui/status_speed_up.png"
+      },
+      {
+        "name": "status_low_ember",
+        "index": 38,
+        "row": 4,
+        "column": 6,
+        "file": "assets/frames/items_ui/status_low_ember.png"
+      },
+      {
+        "name": "status_boss_warning",
+        "index": 39,
+        "row": 4,
+        "column": 7,
+        "file": "assets/frames/items_ui/status_boss_warning.png"
+      },
+      {
+        "name": "touch_stick_base",
+        "index": 40,
+        "row": 5,
+        "column": 0,
+        "file": "assets/frames/items_ui/touch_stick_base.png"
+      },
+      {
+        "name": "touch_stick_knob",
+        "index": 41,
+        "row": 5,
+        "column": 1,
+        "file": "assets/frames/items_ui/touch_stick_knob.png"
+      },
+      {
+        "name": "touch_ability",
+        "index": 42,
+        "row": 5,
+        "column": 2,
+        "file": "assets/frames/items_ui/touch_ability.png"
+      },
+      {
+        "name": "touch_interact",
+        "index": 43,
+        "row": 5,
+        "column": 3,
+        "file": "assets/frames/items_ui/touch_interact.png"
+      },
+      {
+        "name": "indicator_locked",
+        "index": 44,
+        "row": 5,
+        "column": 4,
+        "file": "assets/frames/items_ui/indicator_locked.png"
+      },
+      {
+        "name": "objective_arrow",
+        "index": 45,
+        "row": 5,
+        "column": 5,
+        "file": "assets/frames/items_ui/objective_arrow.png"
+      },
+      {
+        "name": "minimap_player",
+        "index": 46,
+        "row": 5,
+        "column": 6,
+        "file": "assets/frames/items_ui/minimap_player.png"
+      },
+      {
+        "name": "minimap_exit",
+        "index": 47,
+        "row": 5,
+        "column": 7,
+        "file": "assets/frames/items_ui/minimap_exit.png"
+      }
+    ],
+    "effects": [
+      {
+        "name": "slash_01",
+        "index": 0,
+        "row": 0,
+        "column": 0,
+        "file": "assets/frames/effects/slash_01.png"
+      },
+      {
+        "name": "slash_02",
+        "index": 1,
+        "row": 0,
+        "column": 1,
+        "file": "assets/frames/effects/slash_02.png"
+      },
+      {
+        "name": "slash_03",
+        "index": 2,
+        "row": 0,
+        "column": 2,
+        "file": "assets/frames/effects/slash_03.png"
+      },
+      {
+        "name": "slash_04",
+        "index": 3,
+        "row": 0,
+        "column": 3,
+        "file": "assets/frames/effects/slash_04.png"
+      },
+      {
+        "name": "slash_05",
+        "index": 4,
+        "row": 0,
+        "column": 4,
+        "file": "assets/frames/effects/slash_05.png"
+      },
+      {
+        "name": "slash_06",
+        "index": 5,
+        "row": 0,
+        "column": 5,
+        "file": "assets/frames/effects/slash_06.png"
+      },
+      {
+        "name": "slash_07",
+        "index": 6,
+        "row": 0,
+        "column": 6,
+        "file": "assets/frames/effects/slash_07.png"
+      },
+      {
+        "name": "slash_08",
+        "index": 7,
+        "row": 0,
+        "column": 7,
+        "file": "assets/frames/effects/slash_08.png"
+      },
+      {
+        "name": "ember_impact_01",
+        "index": 8,
+        "row": 1,
+        "column": 0,
+        "file": "assets/frames/effects/ember_impact_01.png"
+      },
+      {
+        "name": "ember_impact_02",
+        "index": 9,
+        "row": 1,
+        "column": 1,
+        "file": "assets/frames/effects/ember_impact_02.png"
+      },
+      {
+        "name": "ember_impact_03",
+        "index": 10,
+        "row": 1,
+        "column": 2,
+        "file": "assets/frames/effects/ember_impact_03.png"
+      },
+      {
+        "name": "ember_impact_04",
+        "index": 11,
+        "row": 1,
+        "column": 3,
+        "file": "assets/frames/effects/ember_impact_04.png"
+      },
+      {
+        "name": "ember_impact_05",
+        "index": 12,
+        "row": 1,
+        "column": 4,
+        "file": "assets/frames/effects/ember_impact_05.png"
+      },
+      {
+        "name": "ember_impact_06",
+        "index": 13,
+        "row": 1,
+        "column": 5,
+        "file": "assets/frames/effects/ember_impact_06.png"
+      },
+      {
+        "name": "ember_impact_07",
+        "index": 14,
+        "row": 1,
+        "column": 6,
+        "file": "assets/frames/effects/ember_impact_07.png"
+      },
+      {
+        "name": "ember_impact_08",
+        "index": 15,
+        "row": 1,
+        "column": 7,
+        "file": "assets/frames/effects/ember_impact_08.png"
+      },
+      {
+        "name": "teal_impact_01",
+        "index": 16,
+        "row": 2,
+        "column": 0,
+        "file": "assets/frames/effects/teal_impact_01.png"
+      },
+      {
+        "name": "teal_impact_02",
+        "index": 17,
+        "row": 2,
+        "column": 1,
+        "file": "assets/frames/effects/teal_impact_02.png"
+      },
+      {
+        "name": "teal_impact_03",
+        "index": 18,
+        "row": 2,
+        "column": 2,
+        "file": "assets/frames/effects/teal_impact_03.png"
+      },
+      {
+        "name": "teal_impact_04",
+        "index": 19,
+        "row": 2,
+        "column": 3,
+        "file": "assets/frames/effects/teal_impact_04.png"
+      },
+      {
+        "name": "teal_impact_05",
+        "index": 20,
+        "row": 2,
+        "column": 4,
+        "file": "assets/frames/effects/teal_impact_05.png"
+      },
+      {
+        "name": "teal_impact_06",
+        "index": 21,
+        "row": 2,
+        "column": 5,
+        "file": "assets/frames/effects/teal_impact_06.png"
+      },
+      {
+        "name": "teal_impact_07",
+        "index": 22,
+        "row": 2,
+        "column": 6,
+        "file": "assets/frames/effects/teal_impact_07.png"
+      },
+      {
+        "name": "teal_impact_08",
+        "index": 23,
+        "row": 2,
+        "column": 7,
+        "file": "assets/frames/effects/teal_impact_08.png"
+      },
+      {
+        "name": "nest_break_01",
+        "index": 24,
+        "row": 3,
+        "column": 0,
+        "file": "assets/frames/effects/nest_break_01.png"
+      },
+      {
+        "name": "nest_break_02",
+        "index": 25,
+        "row": 3,
+        "column": 1,
+        "file": "assets/frames/effects/nest_break_02.png"
+      },
+      {
+        "name": "nest_break_03",
+        "index": 26,
+        "row": 3,
+        "column": 2,
+        "file": "assets/frames/effects/nest_break_03.png"
+      },
+      {
+        "name": "nest_break_04",
+        "index": 27,
+        "row": 3,
+        "column": 3,
+        "file": "assets/frames/effects/nest_break_04.png"
+      },
+      {
+        "name": "nest_break_05",
+        "index": 28,
+        "row": 3,
+        "column": 4,
+        "file": "assets/frames/effects/nest_break_05.png"
+      },
+      {
+        "name": "nest_break_06",
+        "index": 29,
+        "row": 3,
+        "column": 5,
+        "file": "assets/frames/effects/nest_break_06.png"
+      },
+      {
+        "name": "nest_break_07",
+        "index": 30,
+        "row": 3,
+        "column": 6,
+        "file": "assets/frames/effects/nest_break_07.png"
+      },
+      {
+        "name": "nest_break_08",
+        "index": 31,
+        "row": 3,
+        "column": 7,
+        "file": "assets/frames/effects/nest_break_08.png"
+      },
+      {
+        "name": "pickup_sparkle_01",
+        "index": 32,
+        "row": 4,
+        "column": 0,
+        "file": "assets/frames/effects/pickup_sparkle_01.png"
+      },
+      {
+        "name": "pickup_sparkle_02",
+        "index": 33,
+        "row": 4,
+        "column": 1,
+        "file": "assets/frames/effects/pickup_sparkle_02.png"
+      },
+      {
+        "name": "pickup_sparkle_03",
+        "index": 34,
+        "row": 4,
+        "column": 2,
+        "file": "assets/frames/effects/pickup_sparkle_03.png"
+      },
+      {
+        "name": "pickup_sparkle_04",
+        "index": 35,
+        "row": 4,
+        "column": 3,
+        "file": "assets/frames/effects/pickup_sparkle_04.png"
+      },
+      {
+        "name": "pickup_sparkle_05",
+        "index": 36,
+        "row": 4,
+        "column": 4,
+        "file": "assets/frames/effects/pickup_sparkle_05.png"
+      },
+      {
+        "name": "pickup_sparkle_06",
+        "index": 37,
+        "row": 4,
+        "column": 5,
+        "file": "assets/frames/effects/pickup_sparkle_06.png"
+      },
+      {
+        "name": "pickup_sparkle_07",
+        "index": 38,
+        "row": 4,
+        "column": 6,
+        "file": "assets/frames/effects/pickup_sparkle_07.png"
+      },
+      {
+        "name": "pickup_sparkle_08",
+        "index": 39,
+        "row": 4,
+        "column": 7,
+        "file": "assets/frames/effects/pickup_sparkle_08.png"
+      },
+      {
+        "name": "portal_01",
+        "index": 40,
+        "row": 5,
+        "column": 0,
+        "file": "assets/frames/effects/portal_01.png"
+      },
+      {
+        "name": "portal_02",
+        "index": 41,
+        "row": 5,
+        "column": 1,
+        "file": "assets/frames/effects/portal_02.png"
+      },
+      {
+        "name": "portal_03",
+        "index": 42,
+        "row": 5,
+        "column": 2,
+        "file": "assets/frames/effects/portal_03.png"
+      },
+      {
+        "name": "portal_04",
+        "index": 43,
+        "row": 5,
+        "column": 3,
+        "file": "assets/frames/effects/portal_04.png"
+      },
+      {
+        "name": "portal_05",
+        "index": 44,
+        "row": 5,
+        "column": 4,
+        "file": "assets/frames/effects/portal_05.png"
+      },
+      {
+        "name": "portal_06",
+        "index": 45,
+        "row": 5,
+        "column": 5,
+        "file": "assets/frames/effects/portal_06.png"
+      },
+      {
+        "name": "portal_07",
+        "index": 46,
+        "row": 5,
+        "column": 6,
+        "file": "assets/frames/effects/portal_07.png"
+      },
+      {
+        "name": "portal_08",
+        "index": 47,
+        "row": 5,
+        "column": 7,
+        "file": "assets/frames/effects/portal_08.png"
+      }
+    ]
+  },
+  "important_note": "AI-generated sprite art may need a final human pixel cleanup before commercial release. The normalized grids and alpha channels are production-loadable now."
+}

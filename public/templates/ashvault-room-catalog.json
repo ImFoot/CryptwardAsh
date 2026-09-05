@@ -1,0 +1,826 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "ashvault-rooms-1.0.0",
+  "templates": [
+    {
+      "id": "start_vestibule_a",
+      "biome": "ashvault",
+      "roles": [
+        "start"
+      ],
+      "width": 11,
+      "height": 11,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 0,
+      "maxDepth": 99,
+      "allowRotate": false,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "start_vestibule_a_e",
+          "side": "E",
+          "offset": 5,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "start_vestibule_a_s",
+          "side": "S",
+          "offset": 5,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "player_spawn",
+          "x": 5,
+          "y": 5
+        },
+        {
+          "type": "safe_space",
+          "x": 5,
+          "y": 5
+        }
+      ],
+      "tags": [
+        "safe",
+        "tutorial"
+      ]
+    },
+    {
+      "id": "start_vestibule_b",
+      "biome": "ashvault",
+      "roles": [
+        "start"
+      ],
+      "width": 13,
+      "height": 9,
+      "shape": "rectangle",
+      "weight": 0.8,
+      "minDepth": 0,
+      "maxDepth": 99,
+      "allowRotate": false,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "start_vestibule_b_e",
+          "side": "E",
+          "offset": 4,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "start_vestibule_b_w",
+          "side": "W",
+          "offset": 4,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "player_spawn",
+          "x": 6,
+          "y": 4
+        },
+        {
+          "type": "safe_space",
+          "x": 6,
+          "y": 4
+        }
+      ],
+      "tags": [
+        "safe",
+        "wide"
+      ]
+    },
+    {
+      "id": "rat_run_straight",
+      "biome": "ashvault",
+      "roles": [
+        "combat"
+      ],
+      "width": 14,
+      "height": 9,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "rat_run_straight_e",
+          "side": "E",
+          "offset": 4,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "rat_run_straight_w",
+          "side": "W",
+          "offset": 4,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "enemy_zone",
+          "x": 7,
+          "y": 4
+        },
+        {
+          "type": "cover",
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "tags": [
+        "narrow",
+        "melee"
+      ]
+    },
+    {
+      "id": "rat_run_bend",
+      "biome": "ashvault",
+      "roles": [
+        "combat"
+      ],
+      "width": 12,
+      "height": 12,
+      "shape": "rectangle",
+      "weight": 0.9,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "rat_run_bend_n",
+          "side": "N",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "rat_run_bend_e",
+          "side": "E",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "enemy_zone",
+          "x": 6,
+          "y": 6
+        },
+        {
+          "type": "cover",
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "tags": [
+        "bend",
+        "melee"
+      ]
+    },
+    {
+      "id": "bone_barracks",
+      "biome": "ashvault",
+      "roles": [
+        "combat"
+      ],
+      "width": 16,
+      "height": 12,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "bone_barracks_n",
+          "side": "N",
+          "offset": 8,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "bone_barracks_e",
+          "side": "E",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "bone_barracks_w",
+          "side": "W",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "enemy_zone",
+          "x": 8,
+          "y": 6
+        },
+        {
+          "type": "cover",
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "tags": [
+        "wide",
+        "cover"
+      ]
+    },
+    {
+      "id": "cinder_gallery",
+      "biome": "ashvault",
+      "roles": [
+        "combat"
+      ],
+      "width": 14,
+      "height": 16,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "cinder_gallery_n",
+          "side": "N",
+          "offset": 7,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "cinder_gallery_s",
+          "side": "S",
+          "offset": 7,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "enemy_zone",
+          "x": 7,
+          "y": 8
+        },
+        {
+          "type": "cover",
+          "x": 4,
+          "y": 5
+        }
+      ],
+      "tags": [
+        "ranged",
+        "cover"
+      ]
+    },
+    {
+      "id": "furnace_cross",
+      "biome": "ashvault",
+      "roles": [
+        "junction"
+      ],
+      "width": 16,
+      "height": 16,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "furnace_cross_n",
+          "side": "N",
+          "offset": 8,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "furnace_cross_e",
+          "side": "E",
+          "offset": 8,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "furnace_cross_s",
+          "side": "S",
+          "offset": 8,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "furnace_cross_w",
+          "side": "W",
+          "offset": 8,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "enemy_zone",
+          "x": 8,
+          "y": 8
+        },
+        {
+          "type": "cover",
+          "x": 5,
+          "y": 5
+        }
+      ],
+      "tags": [
+        "hub",
+        "secretEligible"
+      ]
+    },
+    {
+      "id": "three_way_forge",
+      "biome": "ashvault",
+      "roles": [
+        "junction"
+      ],
+      "width": 15,
+      "height": 13,
+      "shape": "rectangle",
+      "weight": 0.9,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "three_way_forge_n",
+          "side": "N",
+          "offset": 7,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "three_way_forge_e",
+          "side": "E",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "three_way_forge_w",
+          "side": "W",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "enemy_zone",
+          "x": 7,
+          "y": 6
+        },
+        {
+          "type": "cover",
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "tags": [
+        "junction",
+        "hazardLight"
+      ]
+    },
+    {
+      "id": "key_vault",
+      "biome": "ashvault",
+      "roles": [
+        "objective"
+      ],
+      "width": 12,
+      "height": 11,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "key_vault_s",
+          "side": "S",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "objective",
+          "x": 6,
+          "y": 5
+        },
+        {
+          "type": "enemy_zone",
+          "x": 6,
+          "y": 2
+        }
+      ],
+      "tags": [
+        "key",
+        "rewardedDeadEnd"
+      ]
+    },
+    {
+      "id": "seal_shrine",
+      "biome": "ashvault",
+      "roles": [
+        "objective"
+      ],
+      "width": 13,
+      "height": 13,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "seal_shrine_n",
+          "side": "N",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "seal_shrine_s",
+          "side": "S",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "objective",
+          "x": 6,
+          "y": 6
+        },
+        {
+          "type": "enemy_zone",
+          "x": 6,
+          "y": 3
+        }
+      ],
+      "tags": [
+        "shard",
+        "defensible"
+      ]
+    },
+    {
+      "id": "nest_foundry",
+      "biome": "ashvault",
+      "roles": [
+        "spawner"
+      ],
+      "width": 15,
+      "height": 14,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "nest_foundry_e",
+          "side": "E",
+          "offset": 7,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "nest_foundry_w",
+          "side": "W",
+          "offset": 7,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "spawner",
+          "x": 7,
+          "y": 7
+        },
+        {
+          "type": "enemy_zone",
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "tags": [
+        "nest",
+        "wide"
+      ]
+    },
+    {
+      "id": "nest_pit",
+      "biome": "ashvault",
+      "roles": [
+        "spawner"
+      ],
+      "width": 14,
+      "height": 14,
+      "shape": "rectangle",
+      "weight": 0.8,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "nest_pit_n",
+          "side": "N",
+          "offset": 7,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "nest_pit_e",
+          "side": "E",
+          "offset": 7,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "spawner",
+          "x": 7,
+          "y": 7
+        },
+        {
+          "type": "enemy_zone",
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "tags": [
+        "nest",
+        "hazardLight"
+      ]
+    },
+    {
+      "id": "quiet_checkpoint",
+      "biome": "ashvault",
+      "roles": [
+        "checkpoint"
+      ],
+      "width": 11,
+      "height": 11,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "quiet_checkpoint_e",
+          "side": "E",
+          "offset": 5,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "quiet_checkpoint_w",
+          "side": "W",
+          "offset": 5,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "checkpoint",
+          "x": 5,
+          "y": 5
+        },
+        {
+          "type": "safe_space",
+          "x": 5,
+          "y": 5
+        }
+      ],
+      "tags": [
+        "safe",
+        "checkpoint"
+      ]
+    },
+    {
+      "id": "relic_cache",
+      "biome": "ashvault",
+      "roles": [
+        "treasure"
+      ],
+      "width": 9,
+      "height": 9,
+      "shape": "rectangle",
+      "weight": 0.8,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "relic_cache_n",
+          "side": "N",
+          "offset": 4,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "treasure",
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "tags": [
+        "rewardedDeadEnd",
+        "secretEligible"
+      ]
+    },
+    {
+      "id": "seal_approach",
+      "biome": "ashvault",
+      "roles": [
+        "boss_approach"
+      ],
+      "width": 12,
+      "height": 16,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": true,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "seal_approach_n",
+          "side": "N",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        },
+        {
+          "id": "seal_approach_s",
+          "side": "S",
+          "offset": 6,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "gate",
+          "x": 6,
+          "y": 14
+        },
+        {
+          "type": "safe_space",
+          "x": 6,
+          "y": 3
+        }
+      ],
+      "tags": [
+        "calm",
+        "lockedExit"
+      ]
+    },
+    {
+      "id": "bellows_arena",
+      "biome": "ashvault",
+      "roles": [
+        "boss"
+      ],
+      "width": 18,
+      "height": 14,
+      "shape": "rectangle",
+      "weight": 1.0,
+      "minDepth": 1,
+      "maxDepth": 99,
+      "allowRotate": false,
+      "allowMirror": false,
+      "sockets": [
+        {
+          "id": "bellows_arena_n",
+          "side": "N",
+          "offset": 9,
+          "width": 3,
+          "tags": [
+            "standard"
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "type": "boss_spawn",
+          "x": 9,
+          "y": 7
+        },
+        {
+          "type": "exit",
+          "x": 15,
+          "y": 7
+        }
+      ],
+      "tags": [
+        "fixed",
+        "noTransform"
+      ]
+    }
+  ]
+}

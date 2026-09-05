@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.tools/
+npm-bootstrap.tgz
+test-results/
+*.log
