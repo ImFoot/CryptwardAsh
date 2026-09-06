@@ -1,4 +1,17 @@
-# 0.3.3 rollback verification
+# 0.3.4 HUD verification
+
+Verified locally on September 6, 2026 (Pacific time).
+
+Loot notifications and nearby-object instructions share a compact 11px message area above the score. Notifications temporarily take priority over interaction instructions. The score is now visible on narrow screens. A permanent, text-free hand button in the lower right supports mouse and touch interaction and highlights when an object is nearby; E remains available on the keyboard.
+
+- All 16 automated tests passed, including the 10,000-seed progression suite.
+- TypeScript, production build, and GitHub Pages subpath build passed.
+- All 93 development browser integration checks passed.
+- Headless Edge checks verified the button with no nearby target, checkpoint activation by mouse, chest opening by emulated touch, score and loot updates, keyboard interaction with locked and unlocked gates, and button persistence after pause/resume. No browser errors were reported.
+- Layout checks covered 1280 × 720, 768 × 720, 390 × 844, 320 × 568, and 844 × 390: messages above the score, a 52px icon-only button, and no overlap with meters, minimap, or abilities. Desktop and phone screenshots were visually reviewed. Physical touch hardware was not tested.
+- Version 0.3.4 is synchronized in package.json, package-lock.json, and the settings display.
+
+## Previous release: 0.3.3 rollback verification
 
 Verified locally on September 6, 2026 (Pacific time).
 
