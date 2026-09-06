@@ -42,8 +42,22 @@ export function installVerification(s:any){
   fresh();for(let i=0;i<12;i++){const enemy=s.spawn('ash_rat',s.x+35,s.y);s.damageEnemy(enemy,enemy.max);}check(s.level===2&&s.maxHp===115&&s.bladeDamage===16&&s.burstDamage===33,'Kills grant XP and level 2 increases health and attack power');
   s.hp=1;s.die();document.querySelector<HTMLButtonElement>('#retry')!.click();check(s.level===2&&s.hp===115&&s.maxHp===115,'Checkpoint revival preserves earned levels and restores upgraded health');
 
-  fresh();s.paused=true;const startAzimuth=s.view.azimuth;
+  fresh();const destination={x:s.x+80,y:s.y+20};s.pointer=s.project(destination.x,destination.y);s.commandMove();
+  check(Math.hypot(s.moveTarget.x-destination.x,s.moveTarget.y-destination.y)<.01,'Ground click stores the world destination');
+  s.pointer={x:0,y:0};for(let i=0;i<90;i++)s.simulate(1/60);
+  check(Math.hypot(s.x-destination.x,s.y-destination.y)<.01&&!s.moveTarget&&!s.move,'Single click arrives exactly and stops despite subsequent cursor movement');
+  fresh();s.pointer=s.project(s.x+80,s.y);s.commandMove();s.keysDown.add('KeyA');s.simulate(1/60);s.keysDown.clear();check(!s.moveTarget&&!s.pointerHeld,'Keyboard movement cancels a click route');
+  for(const action of ['pause','showMap','die','showTitle']){fresh();s.pointer=s.project(s.x+80,s.y);s.pointerHeld=true;s.commandMove();s[action]();check(!s.moveTarget&&!s.pointerHeld&&!s.movePath.length,action+' clears click destination and held input');}
+  fresh();s.pointerHeld=true;s.pointer=s.project(s.x+80,s.y);s.commandMove();s.start();check(!s.moveTarget&&!s.pointerHeld,'Restart clears click movement');
+  fresh();s.pointer=s.project(s.x+80,s.y);s.commandMove();s.mouseAim=true;s.pointer=s.project(s.x,s.y-100);window.dispatchEvent(new KeyboardEvent('keydown',{code:'ShiftLeft'}));window.dispatchEvent(new KeyboardEvent('keyup',{code:'ShiftLeft'}));
+  check(s.dashAt>s.clock&&!s.moveTarget&&Math.abs(s.dashFace+Math.PI/2)<.01,'Shift dashes toward cursor and cancels destination');
+  const dashStart={x:s.x,y:s.y};s.pointer=s.project(s.x+100,s.y);s.face=0;s.simulate(1/60);check(s.y<dashStart.y&&Math.abs(s.x-dashStart.x)<.01,'Dash keeps its initial direction despite cursor or combat facing changes');
+  fresh();const behind=s.spawn('bonebound',s.x-45,s.y);s.face=0;s.mouseAim=true;s.pointer=s.project(s.x+100,s.y);s.simulate(1/60);check(behind.hp===behind.max-s.bladeDamage,'Automatic melee hits behind the player without clicking or aiming');
+  fresh();const sides=[s.spawn('bonebound',s.x+40,s.y),s.spawn('bonebound',s.x-40,s.y),s.spawn('bonebound',s.x,s.y+40)];s.attack();check(sides.every((e:any)=>e.hp===e.max-s.bladeDamage),'Automatic melee hits nearby targets on all sides');
+  fresh();s.x=48;s.y=784;const throughWall=s.spawn('bonebound',16,s.y);s.attack();check(throughWall.hp===throughWall.max,'Automatic melee cannot hit through stone');
+  fresh();s.paused=true;
   for(let turn=0;turn<8;turn++){s.view.rotate(1);const right=s.screenDirection(1,0),p=s.project(s.x,s.y),r=s.project(s.x+right.x*32,s.y+right.y*32);check(r.x>p.x+25&&Math.abs(r.y-p.y)<.1,'Camera turn '+(turn+1)+': screen-relative movement stays aligned');const back=s.view.unproject(p.x,p.y);check(Math.hypot(back.x-s.x,back.y-s.y)<.001,'Camera turn '+(turn+1)+': ground picking round-trips');}
+  for(let turn=0;turn<8;turn++){s.view.rotate(1);const goal={x:s.x+64,y:s.y};s.pointer=s.project(goal.x,goal.y);s.commandMove();check(Math.hypot(s.moveTarget.x-goal.x,s.moveTarget.y-goal.y)<.01,'Camera turn '+(turn+1)+': click destination stays aligned');}
   const memory=s.view.renderer.info.memory.geometries;
   for(let i=0;i<4;i++){fresh();s.view.render(s,1/60);}
   check(s.view.renderer.info.memory.geometries===memory,'Repeated restarts release model and level GPU geometry');

@@ -9,4 +9,5 @@ export interface RenderState {
  d:DungeonDefinition;objects:Obj[];enemies:Entity[];shots:Shot[];sparks:Spark[];impacts:Impact[];
  x:number;y:number;face:number;clock:number;hp:number;move:boolean;dashUntil:number;attackAnim:number;guard:number;invuln:number;
  furnaceOpen:boolean;gateOpen:boolean;bossDead:boolean;menu:boolean;paused:boolean;active:boolean;
+ moveTarget?:{x:number;y:number};
 }

@@ -183,7 +183,7 @@ button:disabled{cursor:default;opacity:.4}
 .damage-number{position:absolute;top:0;left:0;font-family:Cinzel,Georgia,serif;font-size:20px;font-weight:600;color:#ffddb0;text-shadow:0 2px 4px #000,0 0 12px #000;will-change:transform,opacity}
 .load-sigil{font-size:55px;color:#b6aa8d;margin-bottom:20px}
 .loading .eyebrow{color:#9cacae}
-.modal:has(#brightness)::after{content:'BUILD 0.2.0 · 3D ENGINE'}
+.modal:has(#brightness)::after{content:'BUILD 0.3.0 · 3D ENGINE'}
 .loading{background:radial-gradient(ellipse at center,#1a2931,#070d14 65%)}
 
 #art-review button,#verify-game{background:#172630;border:1px solid #728a89;padding:7px 10px;font-size:10px;color:#d4dedb}
