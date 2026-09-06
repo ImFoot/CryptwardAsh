@@ -1,5 +1,23 @@
 # PC build verification
 
+## Cathedral graphics pass · 0.1.5
+
+Verified September 5, 2026:
+
+- TypeScript, local production build, and GitHub Pages build passed.
+- All 8 automated tests passed, including progression validation across 10,000 generated floors.
+- All 57 browser integration checks passed, including new texture loading, all four architecture frames, atmosphere cleanup across restarts, campaign completion, and three Expedition seeds.
+- Browser error/warning logs were empty after the final integration run.
+- Visually inspected the Vestibule, Gallery, Warden arena, and seeded Expedition. Checked compact layouts at 640 × 780 and 390 × 844; corrected narrow HUD overlap.
+- A local authored floor rebuild measured 514 ms. This is a single timing observation, not an FPS benchmark.
+- New runtime artwork totals 1.41 MiB. Original PNG masters and exact generation prompts are retained; see ART_NOTES.md.
+
+The floor canvas is reused across restarts. CPU-backed material canvases avoid repeated GPU readbacks while baking the isometric map. Integration checks yield a frame between restarts so the browser can present and release rendering work.
+
+For visual review in development, append `?art-review` to the local URL. It adds room-tour controls and suppresses save writes. The tour and integration helpers are excluded from production builds.
+
+## Prior build verification
+
 Verified locally on September 5, 2026.
 
 - TypeScript type check: passed.

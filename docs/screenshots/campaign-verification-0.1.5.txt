@@ -1,0 +1,57 @@
+PASS · All new art and soft-light textures load
+PASS · All four transparent architecture frames are registered
+PASS · Restart rebuilds atmosphere without accumulating decorations
+PASS · Fresh run starts at full vitality and Ember
+PASS · Player movement works
+PASS · Stone walls block movement
+PASS · Furnace Cross locked before key
+PASS · Boss arena locked before three seals
+PASS · Open passage has no freestanding arch
+PASS · Brass key reachable before gate
+PASS · First shard physically reachable
+PASS · Destroyed furnace permanently stops its source
+PASS · First shard collected after furnace destruction
+PASS · Brass key added to inventory
+PASS · Brass gate opens and consumes key
+PASS · Barracks shard reachable through unlocked gate
+PASS · Gallery lever reachable
+PASS · Gallery cage visibly blocks movement before lever
+PASS · Ember refill has a distinct icon
+PASS · Gallery shard requires its lever
+PASS · Lever removes cage and collision
+PASS · Collected seal label disappears
+PASS · Gallery lever releases third shard
+PASS · Seal gate interactable from outside boss arena
+PASS · Three seals open boss gate
+PASS · Boss arena and exit reachable after gate opens
+PASS · Portal refuses exit while boss is alive
+PASS · Burst consumes 18 Ember and deals 30 damage
+PASS · Dash grants contact-damage immunity
+PASS · Post-hit immunity prevents repeated damage
+PASS · Checkpoint revival preserves permanent progression
+PASS · Warden defeat awakens exit
+PASS · Campaign completes and displays results
+PASS · Pause freezes damage, timer, and Ember
+PASS · Expedition 4701: key reachable
+PASS · Expedition 4701: brass gate opens
+PASS · Expedition 4701: objectives reachable
+PASS · Expedition 4701: seal approach reachable
+PASS · Expedition 4701: boss and exit reachable
+PASS · Expedition -987: key reachable
+PASS · Expedition -987: brass gate opens
+PASS · Expedition -987: objectives reachable
+PASS · Expedition -987: seal approach reachable
+PASS · Expedition -987: boss and exit reachable
+PASS · Expedition 731942: key reachable
+PASS · Expedition 731942: brass gate opens
+PASS · Expedition 731942: objectives reachable
+PASS · Expedition 731942: seal approach reachable
+PASS · Expedition 731942: boss and exit reachable
+PASS · Projected controls move right horizontally on screen
+PASS · Live auto-attack defeats a telegraphing melee enemy
+PASS · Sustained movement stops safely at the wall
+PASS · Minimap starts with distant rooms concealed
+PASS · Minimap reveals only terrain explored along the path
+PASS · Enemy population respects the global cap
+PASS · Kills grant XP and level 2 increases health and attack power
+PASS · Checkpoint revival preserves earned levels and restores upgraded health

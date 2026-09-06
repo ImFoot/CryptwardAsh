@@ -1,9 +1,13 @@
 // Development-only integration checks exercise the same scene methods as play.
 export function installVerification(s:any){
  const button=document.createElement('button');button.id='verify-game';button.textContent='Run campaign verification';Object.assign(button.style,{position:'fixed',bottom:'5px',left:'5px',zIndex:'99',padding:'12px'});document.body.append(button);
- button.onclick=()=>{button.remove();const saved=localStorage.getItem('cryptward-save-v1');const results:string[]=[];const check=(v:boolean,label:string)=>{if(!v)throw Error(label);results.push('PASS · '+label);};
+ button.onclick=async()=>{button.remove();const saved=localStorage.getItem('cryptward-save-v1');const results:string[]=[];const check=(v:boolean,label:string)=>{if(!v)throw Error(label);results.push('PASS · '+label);};
+ const restart=async(...args:any[])=>{s.start(...args);s.active=false;await new Promise<void>(resolve=>requestAnimationFrame(()=>resolve()));s.active=true;};
  try{
-  s.start();s.active=false;
+  await restart();s.active=false;
+  check(['cathedral-stone','crypt-architecture','ward-medallion','soft-light'].every(key=>s.textures.exists(key)),'All new art and soft-light textures load');
+  check(s.textures.get('crypt-architecture').has('3'),'All four transparent architecture frames are registered');
+  const artCount=s.atmosphere.decor.length;await restart();await restart();check(s.atmosphere.decor.length===artCount,'Restart rebuilds atmosphere without accumulating decorations');s.active=false;
   check(s.hp===100&&s.ember===100,'Fresh run starts at full vitality and Ember');
   const start={x:s.x,y:s.y};s.moveBody(s,12,0);check(s.x===start.x+12,'Player movement works');
   check(s.solid(20,20),'Stone walls block movement');check(s.solid(1104,752),'Furnace Cross locked before key');check(s.solid(1744,1328),'Boss arena locked before three seals');
@@ -25,20 +29,20 @@ export function installVerification(s:any){
   s.clock=20;s.invuln=0;s.dashUntil=0;s.hit(12);const h2=s.hp;s.hit(12);check(s.hp===h2,'Post-hit immunity prevents repeated damage');
   s.hp=0;s.die();document.querySelector<HTMLButtonElement>('#retry')!.click();check(s.hp===100&&s.shards===3&&s.nests===1&&s.gateOpen,'Checkpoint revival preserves permanent progression');
   const boss=s.enemies.find((e:any)=>e.family==='bellows_warden');s.damageEnemy(boss,boss.max);check(s.bossDead,'Warden defeat awakens exit');s.x=1904;s.y=1328;s.interact();check(!s.active&&document.body.textContent?.includes('You kept the flame.'),'Campaign completes and displays results');
-  s.start();s.pause();const before={hp:s.hp,ember:s.ember,elapsed:s.elapsed};s.update(0,1000);check(s.hp===before.hp&&s.ember===before.ember&&s.elapsed===before.elapsed,'Pause freezes damage, timer, and Ember');
+  await restart();s.pause();const before={hp:s.hp,ember:s.ember,elapsed:s.elapsed};s.update(0,1000);check(s.hp===before.hp&&s.ember===before.ember&&s.elapsed===before.elapsed,'Pause freezes damage, timer, and Ember');
   for(const seed of [4701,-987,731942]){
-   s.start(true,seed);check(reach(obj('key_brass_01')),'Expedition '+seed+': key reachable');
+   await restart(true,seed);check(reach(obj('key_brass_01')),'Expedition '+seed+': key reachable');
    s.pick(obj('key_brass_01'));const gate=obj('gate_furnace');s.x=gate.x-48;s.y=gate.y;s.interact();check(s.furnaceOpen,'Expedition '+seed+': brass gate opens');
    check(reach(obj('seal_shard_b'))&&reach(obj('lever_gallery')),'Expedition '+seed+': objectives reachable');
    for(const e of s.enemies.filter((e:any)=>e.family==='ember_nest'))s.damageEnemy(e,e.hp);s.pick(obj('seal_shard_a'));s.pick(obj('seal_shard_b'));const lever=obj('lever_gallery');s.x=lever.x;s.y=lever.y;s.interact();s.pick(obj('seal_shard_c'));
    const seal=obj('seal_gate');check(reach(seal,80),'Expedition '+seed+': seal approach reachable');s.x=seal.x;s.y=seal.y-48;s.interact();check(s.gateOpen&&reach(obj('exit_portal')),'Expedition '+seed+': boss and exit reachable');
   }
-  s.start();s.keysDown.add('KeyD');const startScreen=s.project(s.x,s.y);for(let i=0;i<15;i++)s.simulate(1/60);s.keysDown.clear();const endScreen=s.project(s.x,s.y);check(endScreen.x-startScreen.x>25&&Math.abs(endScreen.y-startScreen.y)<.1,'Projected controls move right horizontally on screen');
-  s.start();const melee=s.spawn('bonebound',s.x+48,s.y);s.face=0;for(let i=0;i<240;i++)s.simulate(1/60);check(melee.dead&&s.hp>0,'Live auto-attack defeats a telegraphing melee enemy');
-  s.start();s.keysDown.add('KeyA');for(let i=0;i<240;i++)s.simulate(1/60);s.keysDown.clear();check(!s.solid(s.x,s.y),'Sustained movement stops safely at the wall');
-  s.start();const startReveal=s.explored.reduce((sum:number,tile:number)=>sum+tile,0),exit=obj('exit_portal'),exitTile=Math.floor(exit.y/32)*s.d.width+Math.floor(exit.x/32);check(startReveal>0&&!s.explored[exitTile],'Minimap starts with distant rooms concealed');s.keysDown.add('KeyD');for(let i=0;i<120;i++)s.simulate(1/60);s.keysDown.clear();check(s.explored.reduce((sum:number,tile:number)=>sum+tile,0)>startReveal,'Minimap reveals only terrain explored along the path');
+  await restart();s.keysDown.add('KeyD');const startScreen=s.project(s.x,s.y);for(let i=0;i<15;i++)s.simulate(1/60);s.keysDown.clear();const endScreen=s.project(s.x,s.y);check(endScreen.x-startScreen.x>25&&Math.abs(endScreen.y-startScreen.y)<.1,'Projected controls move right horizontally on screen');
+  await restart();const melee=s.spawn('bonebound',s.x+48,s.y);s.face=0;for(let i=0;i<240;i++)s.simulate(1/60);check(melee.dead&&s.hp>0,'Live auto-attack defeats a telegraphing melee enemy');
+  await restart();s.keysDown.add('KeyA');for(let i=0;i<240;i++)s.simulate(1/60);s.keysDown.clear();check(!s.solid(s.x,s.y),'Sustained movement stops safely at the wall');
+  await restart();const startReveal=s.explored.reduce((sum:number,tile:number)=>sum+tile,0),exit=obj('exit_portal'),exitTile=Math.floor(exit.y/32)*s.d.width+Math.floor(exit.x/32);check(startReveal>0&&!s.explored[exitTile],'Minimap starts with distant rooms concealed');s.keysDown.add('KeyD');for(let i=0;i<120;i++)s.simulate(1/60);s.keysDown.clear();check(s.explored.reduce((sum:number,tile:number)=>sum+tile,0)>startReveal,'Minimap reveals only terrain explored along the path');
   for(let i=0;i<40;i++)s.spawn('ash_rat',240,784);check(s.enemies.filter((e:any)=>!e.dead).length===24,'Enemy population respects the global cap');
-  s.start();for(let i=0;i<12;i++){const enemy=s.spawn('ash_rat',s.x+35,s.y);s.damageEnemy(enemy,enemy.max);}check(s.level===2&&s.maxHp===115&&s.bladeDamage===16&&s.burstDamage===33,'Kills grant XP and level 2 increases health and attack power');
+  await restart();for(let i=0;i<12;i++){const enemy=s.spawn('ash_rat',s.x+35,s.y);s.damageEnemy(enemy,enemy.max);}check(s.level===2&&s.maxHp===115&&s.bladeDamage===16&&s.burstDamage===33,'Kills grant XP and level 2 increases health and attack power');
   s.hp=1;s.die();document.querySelector<HTMLButtonElement>('#retry')!.click();check(s.level===2&&s.hp===115&&s.maxHp===115,'Checkpoint revival preserves earned levels and restores upgraded health');
  }catch(e){results.push('FAIL · '+String(e));}
  if(saved===null)localStorage.removeItem('cryptward-save-v1');else localStorage.setItem('cryptward-save-v1',saved);
