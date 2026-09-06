@@ -12,7 +12,9 @@ The local server runs only on this laptop. The launcher reuses an existing Crypt
 | Aim | Mouse; movement direction if the mouse has not been moved |
 | Blade | Automatically attacks nearby targets in front of you |
 | Ember Burst | Space or right mouse button; costs 18 Ember |
-| Dash | Shift; 1.8-second cooldown |
+| Dash | Shift or left mouse button; 1.8-second cooldown |
+| Rotate camera | Q / C, in 45-degree steps |
+| Zoom | Mouse wheel |
 | Interact | E |
 | Map | M; pauses the game |
 | Pause | Escape |
@@ -34,19 +36,19 @@ Completing the campaign unlocks **Expedition** on the title screen. Each new Exp
 
 ## Readability
 
-Walkable floors are lighter stone. Walls are dark masonry with brass boundary edges. Raised columns mark solid obstacles. Locked crossings have visible grilles. Teal marks benefits and wards; orange marks attacks and furnaces. There is no full-screen darkness effect over gameplay.
+The dungeon is rendered in true 3D, with textured stone, articulated characters, real-time shadows, and ambient occlusion. Foreground walls lower automatically to keep nearby action visible. Locked crossings have visible grilles. Teal marks benefits and wards; orange marks attacks and furnaces. There is no full-screen darkness effect over gameplay.
 
 Settings include scene brightness, sound effects, and reduced flashes/shake. Settings, unlocks, and the best score are saved in this browser. Changing browsers or clearing site storage starts a separate save.
 
 ## Build and development
 
-The source uses Phaser 3, TypeScript, and Vite. `dist` is the ready-to-play build. `server.mjs` serves only that directory on localhost.
+The source uses Three.js, TypeScript, and Vite. WebGL 2 is required. Game rules run at a fixed 60 Hz independently of drawing; animation uses elapsed time. `dist` is the ready-to-play build. `server.mjs` serves only that directory on localhost.
 
 With a normal Node.js/npm installation: `npm install`, `npm run dev`, `npm run build`, and `npm test`.
 
 This laptop also has a local npm bootstrap in `.tools/package/bin/npm-cli.js`, usable as `node .tools/package/bin/npm-cli.js run build` when npm is absent from PATH.
 
-The development-only `/?verify` page provides a **Run campaign verification** button for scene integration checks. It is excluded from production builds and does not write test results into game saves.
+The development-only `/?verify` page provides a **Run campaign verification** button for scene integration checks. It is excluded from production builds and does not write test results into game saves. `/?art-review` adds a development-only room tour and frame statistics.
 
 ## Current scope
 

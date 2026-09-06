@@ -1,18 +1,16 @@
-# PC build verification
+# 0.2.0 build verification
 
-Verified locally on September 5, 2026.
+Verified locally on September 5, 2026 (Pacific time).
 
-- TypeScript type check: passed.
-- Production build: passed; Phaser separated from the game bundle.
-- Eight automated data/generation tests: passed.
-- 10,000 generated floors: validated for connectivity and progression; generation p95 approximately 1.40 ms on this laptop.
-- Browser scene checks: campaign objectives, brass-key consumption, gate restrictions, lever requirement, boss/portal conditions, checkpoint persistence, pause behavior, 128 px/s movement, melee combat, wall collision, and the 24-enemy cap passed.
-- Three Expedition seeds exercised through actual scene interaction methods: 4701, -987, 731942.
-- Browser error log during scene checks: no errors or warnings.
-- Packaged local server: HTTP 200; launcher detects and reuses it.
+- TypeScript: passed.
+- Production build and GitHub Pages subpath build: passed. Three.js replaces Phaser; the engine chunk is approximately 135 kB gzip and the game/addons chunk approximately 36 kB gzip.
+- Ten automated tests passed: eight dungeon/generation tests, including 10,000 seeds, plus two checks that walking and death animations behave identically at 30 and 120 frames per second.
+- Generator p95: 2.91 ms in this run.
+- 72 browser integration checks passed: authored campaign, inventory and gates, gallery cage, checkpoint recovery, boss/portal completion, pause, movement, melee, XP, minimap, population cap, three Expedition seeds, all eight camera orientations, perspective ground picking, and GPU geometry cleanup across four repeated restarts.
+- Live visual review covered the entrance, Rat Run combat, and Warden chamber. Title and gameplay layouts were also inspected at 390 × 844, and a narrow-screen HUD overlap was corrected. A brief 1280 × 720 preview observation showed approximately 51–57 fps; this is not a sustained hardware benchmark or a guarantee for other devices.
+- Model pieces are merged per joint/material, stone uses instanced meshes, attack warnings reuse geometry, and transient model/effect geometry is released on removal or restart.
+- The renderer requires WebGL 2. Context loss displays a reload path; saved browser settings and best-run data are retained.
 
-These are automated mechanics checks and visual inspections, not a completed long-form human balance playtest. Mobile gesture acceptance and a sustained FPS benchmark remain outside this PC-first pass.
+The authored campaign and Expedition mechanics are preserved. This pass changes the rendering engine and presentation; it is not a long-form balance playtest. Physical touch/gamepad acceptance and a sustained mobile performance benchmark remain unverified.
 
-Original assets are retained. The authored loader corrects a source zone overlap that otherwise puts the Barracks shard inside the boss restriction. Floor rendering is deliberately brighter than wall rendering; gameplay has no full-screen darkness mask.
-
-For feature scope and controls, see PLAY_GUIDE.md. Cover artwork provenance and the generation prompt are in ART_NOTES.md.
+Use `/?verify` on the development server for the integration report and `/?art-review` for the room tour and frame statistics. Both are excluded from production and suppress save writes. See PLAY_GUIDE.md for controls and ART_NOTES.md for the generated material prompt.

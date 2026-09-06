@@ -1,0 +1,11 @@
+// Development-only room tour. Uses the same world and renderer as normal play.
+export function installArtReview(game:any){
+ const panel=document.createElement('div');panel.id='art-review';Object.assign(panel.style,{position:'fixed',left:'12px',bottom:'115px',zIndex:'90',display:'flex',gap:'4px',maxWidth:'90vw',flexWrap:'wrap'});
+ const go=(name:string)=>{game.start();game.active=false;game.menu=false;game.paused=true;game.furnaceOpen=true;game.gateOpen=true;const o=game.objects.find((o:any)=>o.name===name)||game.objects.find((o:any)=>o.type==='spawn');game.x=o.x;game.y=o.y+64;game.zone=game.d.zones[Math.floor(game.y/32)*game.d.width+Math.floor(game.x/32)];game.view.snapTo(game.x,game.y);game.updateHud();document.querySelector("#toast")?.classList.add("hidden");};
+ for(const [label,name]of [['Entrance','spawn_player'],['Rat Run','nest_rat_run'],['Gallery','seal_shard_c'],['Warden','boss_spawn']]){const b=document.createElement('button');b.textContent=label;b.onclick=()=>go(name);panel.append(b);}
+ const expedition=document.createElement('button');expedition.textContent='Expedition';expedition.onclick=()=>{game.start(true,731942);game.paused=true;};panel.append(expedition);
+ const resume=document.createElement('button');resume.textContent='Play / freeze';resume.onclick=()=>{game.active=true;game.paused=!game.paused;};panel.append(resume);
+ const camera=document.createElement('button');camera.textContent='Rotate';camera.onclick=()=>game.view.rotate(1);panel.append(camera);
+ const hide=document.createElement('button');hide.textContent='Hide tour';hide.onclick=()=>panel.remove();panel.append(hide);const stats=document.createElement('span');stats.id='review-stats';panel.append(stats);document.body.append(panel);
+ let last=performance.now(),frames=0,elapsed=0;const monitor=(now:number)=>{elapsed+=now-last;last=now;frames++;if(elapsed>1500){stats.textContent=`${Math.round(frames*1000/elapsed)} fps · render ${game.view.frameMs.toFixed(1)} ms · ${game.view.drawCalls} draws · ${game.view.renderer.info.memory.geometries} geometries · ${Math.round(game.x)}, ${Math.round(game.y)}`;elapsed=0;frames=0;}if(panel.isConnected)requestAnimationFrame(monitor);};requestAnimationFrame(monitor);
+}
