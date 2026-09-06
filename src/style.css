@@ -6,3 +6,6 @@ button:disabled{cursor:default;opacity:.4}.title-content .wordmark{margin-bottom
 
 #game canvas{cursor:crosshair;transform:perspective(1450px) rotateX(9deg) scale(1.055);transform-origin:50% 55%;filter:drop-shadow(0 28px 34px #0009)}.primary:active,.secondary:active{transform:translateY(1px)}.setting input[type=range]{max-width:170px}.hud .portrait{box-shadow:inset 0 0 14px #4ec8b515}@media(min-width:1100px){.title-content{padding-top:30px;padding-bottom:30px}}
 .xp-label{margin-top:1px;color:#96cfc0}.meter.xp{height:4px;border-color:#3d635b;margin-bottom:0}.meter.xp i{background:linear-gradient(90deg,#357f71,#8de4cb);box-shadow:0 0 9px #61d2b477}.vitals{width:320px}.portrait{height:82px}.portrait img{bottom:9px}@media(max-width:750px){.vitals{width:210px}.portrait{height:64px}}
+
+/* The settings panel is the player-facing place to confirm the loaded build. */
+.modal:has(#brightness)::after{content:"BUILD 0.1.2";display:block;margin-top:20px;padding-top:13px;border-top:1px solid var(--line);font-size:9px;letter-spacing:1.8px;color:var(--teal);text-align:center}
