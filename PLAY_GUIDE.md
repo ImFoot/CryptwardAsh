@@ -8,17 +8,19 @@ The local server runs only on this laptop. The launcher reuses an existing Crypt
 
 | Action | Control |
 | --- | --- |
-| Move | WASD or arrow keys |
-| Aim | Mouse; movement direction if the mouse has not been moved |
-| Blade | Automatically attacks nearby targets in front of you |
+| Move | Left-click a destination; hold left mouse to follow the cursor. WASD / arrows also work and cancel the click destination. |
+| Dash direction | Toward the mouse cursor; movement direction on touch / gamepad before using the mouse |
+| Blade | Automatically attacks nearby enemies in any direction, including while moving; no click or aiming required |
 | Ember Burst | Space or right mouse button; costs 18 Ember |
-| Dash | Shift or left mouse button; 1.8-second cooldown |
+| Dash | Shift; 1.8-second cooldown. Cancels the current click destination. |
 | Rotate camera | Q / C, in 45-degree steps |
 | Zoom | Mouse wheel |
 | Interact | E |
 | Map | M; pauses the game |
 | Pause | Escape |
 | Fullscreen | F |
+
+A teal ring marks your destination. Movement routes around walls and stops at the closest reachable floor for blocked clicks. Locked gates still require E and the appropriate key or seals. Releasing the mouse completes the last destination; pause, map, death, and restarting clear it.
 
 Gamepad support: left stick moves, South bursts, East dashes, West interacts. Touch gestures provide a secondary small-screen fallback; desktop is the primary version.
 

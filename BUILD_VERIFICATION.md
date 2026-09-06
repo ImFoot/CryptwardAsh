@@ -1,4 +1,16 @@
-# 0.2.0 build verification
+# 0.3.0 build verification
+
+Verified locally on September 5, 2026 (Pacific time).
+
+- TypeScript, production build, and GitHub Pages subpath build: passed.
+- All 16 automated tests passed, including six new navigation checks for precise destinations, routing around walls, closed/open crossings, diagonal corner blocking, invalid/out-of-map clicks, and collision sweeps. The existing 10,000-seed progression suite also passed.
+- All 93 development browser integration checks passed. Added coverage includes exact click arrival, keyboard override, clearing destinations on pause/map/death/title/restart, cursor-directed Shift dash, fixed dash direction during combat, automatic melee on all sides, wall occlusion, and click projection at all eight camera orientations.
+- Additional Playwright checks in headless Microsoft Edge used real mouse and keyboard input: click-and-release arrival, hold-to-steer, Shift dash, right-click Burst, simultaneous held movement and Burst, and pause during a held click. No browser errors were reported.
+- Desktop gameplay and settings screenshots were visually reviewed at 1280 × 720, including the destination ring and updated control instructions.
+
+Left-click moves; nearby enemies are still attacked automatically without clicking or aiming. Routes respect the existing collision rules and progression locks. Shift cancels the current route and dashes toward the cursor. Keyboard, touch, and gamepad alternatives remain available; physical touch/gamepad acceptance was not repeated in this pass.
+
+## Previous release: 0.2.0 engine verification
 
 Verified locally on September 5, 2026 (Pacific time).
 

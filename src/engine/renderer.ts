@@ -51,6 +51,7 @@ export class DungeonRenderer {
  private enemyBars=new Map<number,HTMLDivElement>();
  private target=new T.Vector3();
  private raycaster=new T.Raycaster();
+ private destination=new T.Mesh(new T.RingGeometry(.25,.32,48),new T.MeshBasicMaterial({color:0x89f5d0,transparent:true,opacity:.8,side:T.DoubleSide,depthWrite:false}));
  private ground=new T.Plane(up,0);
  private basalt?:T.Texture;
  private bump?:T.Texture;
@@ -76,6 +77,7 @@ export class DungeonRenderer {
   this.renderer.info.autoReset=false;
   this.scene.background=new T.Color(0x080e14);this.scene.fog=new T.FogExp2(0x101c29,.019);
   this.scene.add(this.world,this.actors,this.effects);
+  this.destination.rotation.x=-Math.PI/2;this.destination.visible=false;this.scene.add(this.destination);
   const hemi=new T.HemisphereLight(0x829fbc,0x352823,1.5);this.scene.add(hemi);
   this.moon.castShadow=true;this.moon.shadow.mapSize.set(2048,2048);
   Object.assign(this.moon.shadow.camera,{left:-13,right:13,top:13,bottom:-13,near:.5,far:65});
@@ -235,6 +237,8 @@ export class DungeonRenderer {
   const start=performance.now();
   const frozen=state.paused||(!state.active&&!state.menu);if(!frozen)this.time+=dt;
   const t=this.time;
+  this.destination.visible=!!state.moveTarget&&state.active&&!state.paused;
+  if(state.moveTarget)this.destination.position.set(state.moveTarget.x/32,.06,state.moveTarget.y/32);
   const wanted=new T.Vector3(state.x/32,.35,state.y/32);if(state.menu)wanted.add(new T.Vector3(.6,0,-.3));
   if(this.menuCamera!==state.menu){this.menuCamera=state.menu;if(state.menu)this.camera.setViewOffset(window.innerWidth,window.innerHeight,-window.innerWidth*.19,0,window.innerWidth,window.innerHeight);else this.camera.clearViewOffset();}
   this.target.lerp(wanted,1-Math.exp(-dt*7));this.positionCamera(1);
