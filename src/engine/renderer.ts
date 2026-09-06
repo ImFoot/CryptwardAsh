@@ -7,6 +7,7 @@ import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
 import {SSAOPass} from 'three/addons/postprocessing/SSAOPass.js';
 import {character,animateCharacter,disposeModel,checkpoint,pickup,gate,portal,box,cylinder,ring,orb,materials,type Character} from './models';
+import {buildEnvironment} from './environment';
 import type {DungeonDefinition} from '../dungeon';
 import type {RenderState,Obj} from './types';
 
@@ -30,6 +31,7 @@ export class DungeonRenderer {
  readonly effects=new T.Group();
  readonly labels=document.createElement('div');
  private resources:{dispose:()=>void}[]=[];
+ private environment?:ReturnType<typeof buildEnvironment>;
  private models=new Map<number,Character>();
  private objectModels=new Map<string,T.Group>();
  private cage?:T.Group;
@@ -40,8 +42,8 @@ export class DungeonRenderer {
  private seals:{mesh:T.Group;kind:'furnace'|'boss'}[]=[];
  private lightSources:{position:T.Vector3;color:number;intensity:number;name?:string}[]=[];
  private pointLights:T.PointLight[]=[];
- private moon=new T.DirectionalLight(0xa7c8e0,3.1);
- private heroLamp=new T.PointLight(0xffc08b,14,6,2);
+ private moon=new T.DirectionalLight(0x8299b2,2.25);
+ private heroLamp=new T.PointLight(0xffb16d,9,5.5,2);
  private motes:T.Points;
  private particleGeometry=new T.BufferGeometry();
  private particlePositions=new Float32Array(1500*3);
@@ -72,26 +74,27 @@ export class DungeonRenderer {
   this.renderer=new T.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
   this.renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.6));
   this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.PCFSoftShadowMap;
-  this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.24;
+  this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.14;
   this.renderer.outputColorSpace=T.SRGBColorSpace;parent.replaceChildren(this.renderer.domElement);
   this.renderer.info.autoReset=false;
-  this.scene.background=new T.Color(0x080e14);this.scene.fog=new T.FogExp2(0x101c29,.019);
+  this.scene.background=new T.Color(0x05090d);this.scene.fog=new T.FogExp2(0x101923,.024);
   this.scene.add(this.world,this.actors,this.effects);
   this.destination.rotation.x=-Math.PI/2;this.destination.visible=false;this.scene.add(this.destination);
-  const hemi=new T.HemisphereLight(0x829fbc,0x352823,1.5);this.scene.add(hemi);
-  this.moon.castShadow=true;this.moon.shadow.mapSize.set(2048,2048);
+  // A blue-black skylight keeps shadowed stone readable while leaving the firelight to lead the eye.
+  const hemi=new T.HemisphereLight(0x68819c,0x1a1010,1.14);this.scene.add(hemi);
+  this.moon.intensity=2.5;this.moon.castShadow=true;this.moon.shadow.mapSize.set(2048,2048);
   Object.assign(this.moon.shadow.camera,{left:-13,right:13,top:13,bottom:-13,near:.5,far:65});
   this.moon.shadow.bias=-.0003;this.moon.shadow.normalBias=.045;this.moon.shadow.radius=2.5;
   this.scene.add(this.moon,this.moon.target,this.heroLamp);
-  for(let i=0;i<4;i++){const light=new T.PointLight(0xff782c,0,13,2);this.pointLights.push(light);this.scene.add(light);}
+  for(let i=0;i<4;i++){const light=new T.PointLight(0xff782c,0,11,2);this.pointLights.push(light);this.scene.add(light);}
   const pmrem=new T.PMREMGenerator(this.renderer),room=new RoomEnvironment();
-  const env=pmrem.fromScene(room,.08);this.scene.environment=env.texture;this.scene.environmentIntensity=.3;room.dispose();pmrem.dispose();
+  const env=pmrem.fromScene(room,.08);this.scene.environment=env.texture;this.scene.environmentIntensity=.25;room.dispose();pmrem.dispose();
   this.composer=new EffectComposer(this.renderer);
   this.composer.addPass(new RenderPass(this.scene,this.camera));
-  this.ao=new SSAOPass(this.scene,this.camera,1280,720,12);this.ao.kernelRadius=.45;this.ao.minDistance=.0003;this.ao.maxDistance=.035;this.composer.addPass(this.ao);
-  this.bloom=new UnrealBloomPass(new T.Vector2(1280,720),.35,.42,1.35);this.composer.addPass(this.bloom);this.composer.addPass(new OutputPass());
+  this.ao=new SSAOPass(this.scene,this.camera,1280,720,12);this.ao.kernelRadius=.5;this.ao.minDistance=.0003;this.ao.maxDistance=.032;this.composer.addPass(this.ao);
+  this.bloom=new UnrealBloomPass(new T.Vector2(1280,720),.26,.35,1.5);this.composer.addPass(this.bloom);this.composer.addPass(new OutputPass());
   this.actors.add(this.hero.root);
-  const particleMaterial=new T.PointsMaterial({size:.075,vertexColors:true,transparent:true,opacity:.7,depthWrite:false,blending:T.AdditiveBlending,map:this.softTexture()});
+  const particleMaterial=new T.PointsMaterial({size:.06,vertexColors:true,transparent:true,opacity:.54,depthWrite:false,blending:T.AdditiveBlending,map:this.softTexture()});
   this.particleGeometry.setAttribute('position',new T.BufferAttribute(this.particlePositions,3).setUsage(T.DynamicDrawUsage));
   this.particleGeometry.setAttribute('color',new T.BufferAttribute(this.particleColors,3).setUsage(T.DynamicDrawUsage));
   this.motes=new T.Points(this.particleGeometry,particleMaterial);this.motes.frustumCulled=false;this.effects.add(this.motes);
@@ -103,18 +106,19 @@ export class DungeonRenderer {
   this.basalt=await new T.TextureLoader().loadAsync(asset('assets/materials/basalt.webp'));
   this.basalt.colorSpace=T.SRGBColorSpace;this.basalt.wrapS=this.basalt.wrapT=T.RepeatWrapping;this.basalt.anisotropy=Math.min(8,this.renderer.capabilities.getMaxAnisotropy());
   this.bump=this.basalt.clone();this.bump.colorSpace=T.NoColorSpace;
-  for(const mat of [materials.steel,materials.dark,materials.brass]){mat.bumpMap=this.bump;mat.bumpScale=.013;mat.needsUpdate=true;}
+  for(const mat of [materials.steel,materials.dark,materials.brass]){mat.bumpMap=this.bump;mat.bumpScale=.011;mat.envMapIntensity=.34;mat.needsUpdate=true;}
  }
  private softTexture(){const c=document.createElement('canvas');c.width=c.height=32;const ctx=c.getContext('2d')!;const g=ctx.createRadialGradient(16,16,0,16,16,16);g.addColorStop(0,'white');g.addColorStop(.25,'#ffffffc0');g.addColorStop(1,'#ffffff00');ctx.fillStyle=g;ctx.fillRect(0,0,32,32);return new T.CanvasTexture(c);}
  resize(){const w=window.innerWidth,h=window.innerHeight;this.camera.aspect=w/h;if(this.menuCamera)this.camera.setViewOffset(w,h,-w*.19,0,w,h);this.camera.updateProjectionMatrix();this.renderer.setSize(w,h);this.composer.setSize(w,h);}
  private own<V extends {dispose:()=>void}>(resource:V):V{this.resources.push(resource);return resource;}
- private stone(color:number,roughness=.85){return this.own(new T.MeshStandardMaterial({color,map:this.basalt,bumpMap:this.bump,bumpScale:.19,roughness,metalness:.03}));}
+ private stone(color:number,roughness=.85){return this.own(new T.MeshStandardMaterial({color,map:this.basalt,bumpMap:this.bump,bumpScale:.16,roughness,metalness:.025,envMapIntensity:.12}));}
  private instances(geometry:T.BufferGeometry,material:T.Material,items:{x:number;y:number;z:number;sx:number;sy:number;sz:number;rotation?:number;color?:T.Color}[]){
   const mesh=new T.InstancedMesh(geometry,material,items.length);const c=new T.Color();
   items.forEach((v,i)=>{dummy.position.set(v.x,v.y,v.z);dummy.rotation.set(0,v.rotation||0,0);dummy.scale.set(v.sx,v.sy,v.sz);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);mesh.setColorAt(i,v.color||c.set(0xffffff));});
   mesh.castShadow=true;mesh.receiveShadow=true;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);this.world.add(mesh);this.own(mesh);return mesh;
  }
  build(d:DungeonDefinition){
+  this.environment?.dispose();this.environment=undefined;
   for(const resource of this.resources)resource.dispose();this.resources=[];this.world.clear();
   for(const model of this.models.values())disposeModel(model.root);for(const model of this.objectModels.values())disposeModel(model);
   this.actors.clear();this.actors.add(this.hero.root);this.models.clear();this.objectModels.clear();this.walls=[];this.seals=[];this.lightSources=[];this.cage=undefined;
@@ -122,13 +126,14 @@ export class DungeonRenderer {
   this.labels.replaceChildren();this.floating=[];this.enemyBars.clear();
   const solid=(x:number,z:number)=>x<0||z<0||x>=d.width||z>=d.height||d.collision[z*d.width+x]>0;
   const floorGeo=this.own(new RoundedBoxGeometry(1,.18,1,2,.04));
-  const floorMaterial=this.stone(0xa3a7a1,.78),wallMaterial=this.stone(0x687071),capMaterial=this.stone(0x79837f);
+  // Basalt stays well below white so the floor holds its value under a warm pool of light.
+  const floorMaterial=this.stone(0xa0a59e,.9),wallMaterial=this.stone(0x68737a,.95),capMaterial=this.stone(0x6a7472,.92);
   const floorItems=[] as Parameters<DungeonRenderer['instances']>[2];
   const bedItems=[] as Parameters<DungeonRenderer['instances']>[2];
   for(let z=0;z<d.height;z++)for(let x=0;x<d.width;x++){
    const n=hash(x,z),zone=d.zones[z*d.width+x];
    if(!solid(x,z)){
-    const color=new T.Color(zone===8?0xb5a18b:zone===6?0x86a6a0:0xb7b7a8).multiplyScalar(.67+n*.32);
+    const color=new T.Color(zone===8?0xb09c7d:zone===6?0x7e9994:0xb3b5aa).multiplyScalar(.68+n*.3);
     // Paired slabs form staggered flagstones instead of a checkerboard.
     const paired=!solid(x+1,z)&&((x+(z%2))%2===0),previous=!solid(x-1,z)&&((x-1+(z%2))%2===0);
     if(!previous)floorItems.push({x:x+(paired?1:.5),y:-.10+n*.009,z:z+.5,sx:paired?1.995:.995,sy:1,sz:.997,color});
@@ -139,18 +144,18 @@ export class DungeonRenderer {
    }
   }
   this.instances(floorGeo,floorMaterial,floorItems);
-  this.instances(this.own(new T.BoxGeometry(1,1,1)),this.stone(0x202832),bedItems);
+  this.instances(this.own(new T.BoxGeometry(1,1,1)),this.stone(0x151b21,.96),bedItems);
   const wallGeo=this.own(new RoundedBoxGeometry(1,1,1,2,.045));
   this.wallMesh=this.instances(wallGeo,wallMaterial,this.walls.map(w=>({x:w.x,y:w.height/2,z:w.z,sx:.97,sy:w.height,sz:.97,color:new T.Color().setScalar(.7+hash(w.x,w.z)*.3)})));
   this.caps=this.instances(this.own(new RoundedBoxGeometry(1,.12,1,2,.035)),capMaterial,this.walls.map(w=>({x:w.x,y:w.height+.02,z:w.z,sx:1.06,sy:1,sz:1.06})));
-  // Broad texture features remain visible at game scale; mortar follows cutaway walls.
+  // Broad mineral drift and soot remain visible at game scale; mortar follows cutaway walls.
   for(const material of [floorMaterial,capMaterial])material.onBeforeCompile=shader=>{
    shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 rockWorld;').replace('#include <worldpos_vertex>','#include <worldpos_vertex>\nvec4 rp=vec4(transformed,1.0);\n#ifdef USE_INSTANCING\nrp=instanceMatrix*rp;\n#endif\nrockWorld=(modelMatrix*rp).xyz;');
-   shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 rockWorld;').replace('#include <map_fragment>','diffuseColor *= texture2D(map,rockWorld.xz*.26);');
+   shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 rockWorld;').replace('#include <map_fragment>','diffuseColor *= texture2D(map,rockWorld.xz*.24);\nfloat soot=.9+.1*sin(rockWorld.x*1.7+rockWorld.z*.9)*sin(rockWorld.z*1.3-rockWorld.x*.45);\ndiffuseColor.rgb*=soot;');
   };
   wallMaterial.onBeforeCompile=shader=>{
    shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 stonePosition;').replace('#include <worldpos_vertex>','#include <worldpos_vertex>\nvec4 sp=vec4(transformed,1.0);\n#ifdef USE_INSTANCING\nsp=instanceMatrix*sp;\n#endif\nstonePosition=(modelMatrix*sp).xyz;');
-   shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 stonePosition;').replace('#include <map_fragment>','diffuseColor *= texture2D(map,vec2(stonePosition.x+stonePosition.z,stonePosition.y)*.35);').replace('#include <color_fragment>','#include <color_fragment>\nfloat mortar=smoothstep(0.009,0.03,abs(fract(stonePosition.y*2.0)-0.5));\ndiffuseColor.rgb*=mix(0.35,1.0,mortar);');
+   shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 stonePosition;').replace('#include <map_fragment>','diffuseColor *= texture2D(map,vec2(stonePosition.x+stonePosition.z,stonePosition.y)*.3);').replace('#include <color_fragment>','#include <color_fragment>\nfloat course=abs(fract(stonePosition.y*1.48)-.5);\nfloat joint=smoothstep(.035,.1,course);\nfloat soot=.88+.12*sin(stonePosition.x*1.4+stonePosition.z*.7)*sin(stonePosition.y*2.2);\ndiffuseColor.rgb*=mix(.72,1.,joint)*soot;');
   };
   const spawn=d.objects.find(o=>o.type==='spawn')!;
   // An imposing recessed vault door anchors the starting chamber's rear wall.
@@ -168,7 +173,7 @@ export class DungeonRenderer {
    else if(o.type==='secret'){model=new T.Group();const fissure=box(model,materials.fire,0,.42,0,.025,.85,.03);fissure.rotation.z=.25;}
    if(model){model.position.set(o.x/32,0,o.y/32);this.actors.add(model);this.objectModels.set(o.name,model);}
    if(o.name==='seal_shard_c'){this.cage=gate(1.8);const side=gate(1.8);side.rotation.y=Math.PI/2;this.cage.add(side);this.cage.position.set(o.x/32,0,o.y/32);this.actors.add(this.cage);}
-   if(['checkpoint','spawner','boss','exit'].includes(o.type))this.lightSources.push({position:new T.Vector3(o.x/32,1.2,o.y/32),color:o.type==='checkpoint'||o.type==='exit'?0x54c7e4:0xff6a20,intensity:o.type==='boss'?70:o.type==='checkpoint'?25:43,name:o.name});
+   if(['checkpoint','spawner','boss','exit'].includes(o.type))this.lightSources.push({position:new T.Vector3(o.x/32,1.2,o.y/32),color:o.type==='checkpoint'||o.type==='exit'?0x54c7e4:0xff6a20,intensity:o.type==='boss'?46:o.type==='checkpoint'?17:31,name:o.name});
   }
   this.buildBarriers(d);
   this.buildLandmarks(d);
@@ -176,12 +181,13 @@ export class DungeonRenderer {
   for(const w of this.walls){const x=Math.floor(w.x),z=Math.floor(w.z);if((x+z*3)%17!==0||solid(x,z+1))continue;
    const vent=new T.Group();box(vent,materials.dark,0,.69,0,.7,.48,.12);box(vent,materials.fire,0,.69,.07,.56,.28,.025);
    for(let i=0;i<5;i++)box(vent,materials.dark,-.25+i*.125,.7,.095,.045,.36,.05);
-   vent.position.set(w.x,0,w.z+.51);this.world.add(vent);this.lightSources.push({position:new T.Vector3(w.x,.7,w.z+.9),color:0xff7833,intensity:19});
+   vent.position.set(w.x,0,w.z+.51);this.world.add(vent);this.lightSources.push({position:new T.Vector3(w.x,.7,w.z+.9),color:0xff7833,intensity:13});
   }
   // Cracked fragments remain low enough to preserve the walkable silhouette.
   const rubble=[] as Parameters<DungeonRenderer['instances']>[2];
   for(const w of this.walls){const n=hash(w.x+9,w.z+4);if(n<.78)continue;for(let i=0;i<3;i++)rubble.push({x:w.x+Math.sin(i*4)*.55,y:.05,z:w.z+Math.cos(i*3)*.55,sx:.15+n*.18,sy:.09+i*.05,sz:.14,rotation:n*6});}
-  this.instances(this.own(new T.DodecahedronGeometry(.7,0)),this.stone(0x687178),rubble);
+  this.instances(this.own(new T.DodecahedronGeometry(.7,0)),this.stone(0x39444a,.94),rubble);
+  this.environment=buildEnvironment(d);this.world.add(this.environment.root);
   this.snapTo(spawn.x,spawn.y);
  }
  private buildLandmarks(d:DungeonDefinition){
@@ -204,7 +210,7 @@ export class DungeonRenderer {
   for(const y of [.4,1.6,2.6])box(g,materials.brass,0,y,.18,1.5,.07,.04);
   const wheel=ring(g,materials.brass,0,1.6,.24,.36);for(let n=0;n<6;n++){const spoke=box(g,materials.brass,0,1.6,.24,.65,.035,.035);spoke.rotation.z=n*Math.PI/3;}wheel.castShadow=true;
   box(g,materials.cyan,0,3.07,.38,.7,.035,.035);
-  this.lightSources.push({position:new T.Vector3(x,2.6,z+.9),color:0x75cde6,intensity:28});
+  this.lightSources.push({position:new T.Vector3(x,2.6,z+.9),color:0x75cde6,intensity:12});
  }
  private buildBarriers(d:DungeonDefinition){
   const zone=(x:number,y:number)=>d.zones[y*d.width+x]||0;
@@ -243,7 +249,7 @@ export class DungeonRenderer {
   if(this.menuCamera!==state.menu){this.menuCamera=state.menu;if(state.menu)this.camera.setViewOffset(window.innerWidth,window.innerHeight,-window.innerWidth*.19,0,window.innerWidth,window.innerHeight);else this.camera.clearViewOffset();}
   this.target.lerp(wanted,1-Math.exp(-dt*7));this.positionCamera(1);
   if(!reduced&&this.shakeAmount>.001){this.camera.position.x+=(Math.random()-.5)*this.shakeAmount;this.camera.position.z+=(Math.random()-.5)*this.shakeAmount;}this.shakeAmount*=Math.exp(-dt*13);
-  this.renderer.toneMappingExposure=1.24*brightness;this.bloom.strength=reduced?.14:.32;
+  this.renderer.toneMappingExposure=1.14*brightness;this.bloom.strength=reduced?.09:.24;
   this.moon.position.copy(this.target).add(new T.Vector3(-7,13,-4));this.moon.target.position.copy(this.target);
   this.heroLamp.position.set(state.x/32,.9,state.y/32+.2);
   const activeLights=this.lightSources.filter(l=>!l.name||!state.objects.find(o=>o.name===l.name&&o.type==='spawner'&&o.done)).sort((a,b)=>a.position.distanceToSquared(this.target)-b.position.distanceToSquared(this.target));
@@ -254,6 +260,7 @@ export class DungeonRenderer {
    dummy.position.set(w.x,w.current/2,w.z);dummy.scale.set(.97,w.current,.97);dummy.rotation.set(0,0,0);dummy.updateMatrix();this.wallMesh?.setMatrixAt(i,dummy.matrix);
    dummy.position.y=w.current+.03;dummy.scale.set(1.06,1,1.06);dummy.updateMatrix();this.caps?.setMatrixAt(i,dummy.matrix);
   });if(this.wallMesh)this.wallMesh.instanceMatrix.needsUpdate=true;if(this.caps)this.caps.instanceMatrix.needsUpdate=true;
+  this.environment?.updateCutaway(state.x/32,state.y/32,frontX,frontZ,dt);
   this.hero.root.position.set(state.x/32,0,state.y/32);this.hero.root.visible=true;
   if(!frozen)animateCharacter(this.hero,t,dt,state.move,state.attackAnim>state.clock?(state.attackAnim-state.clock)/.3:0,state.face,state.hp<=0);
   const keep=new Set<number>();
@@ -290,8 +297,9 @@ export class DungeonRenderer {
   for(let i=this.floating.length-1;i>=0;i--){const label=this.floating[i];label.age+=dt;const p=new T.Vector3(label.x,1.6+label.age,label.z).project(this.camera);label.element.style.transform=`translate(${(p.x+1)*window.innerWidth/2}px,${(1-p.y)*window.innerHeight/2}px)`;label.element.style.opacity=String(1-label.age);if(label.age>1){label.element.remove();this.floating.splice(i,1);}}
   let count=0;const color=new T.Color();
   const add=(x:number,y:number,z:number,c:number,strength=1)=>{if(count>=1500)return;color.set(c).multiplyScalar(strength);this.particlePositions.set([x,y,z],count*3);this.particleColors.set([color.r,color.g,color.b],count*3);count++;};
-  for(let i=0;i<130;i++){const x=s.x/32+Math.sin(i*43.17)*11,z=s.y/32+Math.cos(i*23.91)*11,y=((i*.293+t*.1)%4);add(x,y,z,i%4?0x52667b:0xd48b41,.35);}
-  for(const l of this.lightSources){if(l.position.distanceToSquared(this.target)>90)continue;for(let i=0;i<9;i++){const a=(t*.6+i*.147)%1;add(l.position.x+Math.sin(i*17+t)*.16,l.position.y+a*1.3,l.position.z+Math.cos(i*11)*.15,l.color,(1-a)*1.5);}}
+  // Shadow mist is deliberately quiet; only furnaces and action get bright particles.
+  for(let i=0;i<110;i++){const x=s.x/32+Math.sin(i*43.17)*11,z=s.y/32+Math.cos(i*23.91)*11,y=((i*.293+t*.08)%4);add(x,y,z,i%5?0x354959:0xb86a32,.2);}
+  for(const l of this.lightSources){if(l.position.distanceToSquared(this.target)>90)continue;for(let i=0;i<7;i++){const a=(t*.6+i*.147)%1;add(l.position.x+Math.sin(i*17+t)*.16,l.position.y+a*1.3,l.position.z+Math.cos(i*11)*.15,l.color,(1-a)*.9);}}
   for(const spark of s.sparks)add(spark.x/32,.25+(1-spark.life/spark.max)*1.3,spark.y/32,spark.color,Math.max(0,spark.life/spark.max)*2);
   for(const shot of s.shots){add(shot.x/32,.5,shot.y/32,0xff5920,4);for(let i=1;i<6;i++)add((shot.x-shot.vx*.012*i)/32,.5,(shot.y-shot.vy*.012*i)/32,0xff7022,2-i*.3);}
   this.particleGeometry.setDrawRange(0,count);this.particleGeometry.attributes.position.needsUpdate=true;this.particleGeometry.attributes.color.needsUpdate=true;
