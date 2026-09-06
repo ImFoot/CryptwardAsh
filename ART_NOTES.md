@@ -1,14 +1,5 @@
 # Graphics assets
 
-## 0.3.2: Ashvault visual overhaul
-
-The existing generated basalt texture is reused unchanged. All new art is authored as Three.js geometry and materials; no new downloaded or third-party assets are included.
-
-- Rebuilt the Warden hero and enemy families with rough steel, aged brass, dark leather, cloth, and restrained ward/ember accents. Joint animation remains frame-rate independent.
-- Refined furnaces, checkpoints, gates, portals, and pickups. Rigid pieces merge by material while animated joints remain separate.
-- Added deterministic wall architecture that follows camera cutaways, floor grates, rubble, ossuary details, gallery inlays, and arena seal details. Repeated environmental pieces use instancing and release their GPU resources on rebuild.
-- Rebalanced matte stone, cool ambient light, warm focal lights, bloom, and particles for readable dark-fantasy scenes. Gameplay, controls, and the compact HUD remain intact.
-
 ## 0.2.0: Three.js world
 
 The runtime now draws the dungeon, characters, enemies, pickups, gates, and effects as actual 3D meshes. Character joints animate separately; rigid pieces are merged by material to reduce drawing work. Stone uses a generated albedo, a derived bump texture in the renderer, real-time directional shadows, ambient occlusion, environment reflections, and restrained bloom.

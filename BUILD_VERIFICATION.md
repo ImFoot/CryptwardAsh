@@ -1,15 +1,13 @@
-# 0.3.2 build verification
+# 0.3.3 rollback verification
 
 Verified locally on September 6, 2026 (Pacific time).
 
-- TypeScript, production build, and GitHub Pages subpath build passed.
-- Automated tests include the existing 10,000-seed progression suite and animation invariants, plus a new environment regression test for camera cutaway positions, lowering/restoration, instanced-mesh disposal, and unchanged dungeon data.
-- All 93 development browser integration checks passed, including eight camera orientations and repeated-restart GPU geometry cleanup. Additional real mouse/keyboard checks passed for click movement, steering, dash, Burst, and pause.
-- Visually reviewed the title, entrance, Rat Run, Gallery, Warden arena, generated Expedition, a rotated close combat view with an attack warning, and a 390 x 844 layout. Revised overly glossy/dark stone, freestanding wall details, and weapon clipping before acceptance.
-- The final headless Edge room tour reported no application errors or missing game assets. The pre-existing missing favicon request is excluded from that report.
-- Sample room counters ranged from 272 to 492 draw calls across all rendering passes; CPU-side render submission samples were approximately 4.3 to 7.1 ms. These short headless observations are not a sustained GPU or mobile benchmark. Physical touch/gamepad acceptance was not repeated.
+PR #12 is reverted because its art overhaul added unwanted visual clutter. Character models, props, lighting, materials, and art notes match the pre-overhaul commit `c3a678d`. The added environment module and its dedicated test are removed. The earlier compact HUD and click controls remain intact.
 
-New art is code-native Three.js geometry and materials with the existing generated basalt texture reused. Gameplay rules and the compact HUD are preserved. Version 0.3.2 is synchronized in the package files and settings display. Art provenance is recorded in ART_NOTES.md.
+- All 16 automated tests passed, including animation invariants and the 10,000-seed progression suite.
+- TypeScript, production build, and GitHub Pages subpath build passed.
+- All 93 browser integration checks and additional real mouse/keyboard checks passed. The restored desktop gameplay view was visually checked; no browser errors were reported.
+- Version 0.3.3 is synchronized in package.json, package-lock.json, and the settings display.
 
 ## Previous release: 0.3.1 build verification
 
