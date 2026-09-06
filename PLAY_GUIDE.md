@@ -30,7 +30,7 @@ Destroying furnaces restores Ember and prevents future waves. Shards restore som
 
 Enemy and furnace kills grant XP. Level 2 requires 120 XP; later levels require 360, 720, and 1,200 total XP. Each level adds 15 maximum health, restores up to 35 health, adds 2 blade damage, and adds 3 Ember Burst damage. Earned levels survive checkpoint revival. A normal campaign clear reaches at least Level 2 before the boss, while fuller clears can grow stronger.
 
-Completing the campaign unlocks **Expedition** on the title screen. Enter a signed integer seed to play or repeat a ten-room floor assembled from the supplied room templates. This first Expedition implementation uses a fixed progression graph with seeded room choices and rewards.
+Completing the campaign unlocks **Expedition** on the title screen. Each new Expedition creates a fresh ten-room floor assembled from the supplied room templates. **Restart the Descent** resets the current arrangement, while **Descend Again** creates a new one; reviving at a checkpoint preserves the current floor and permanent progress.
 
 ## Readability
 
@@ -50,4 +50,4 @@ The development-only `/?verify` page provides a **Run campaign verification** bu
 
 ## Current scope
 
-This is the playable PC-first campaign and initial seeded Expedition build. It includes the full authored map, all six enemy/source families, the three-phase Warden, objectives, checkpoint recovery, results, map, sound effects, and settings. The original specification's complete mobile gesture/accessibility acceptance suite, daily mode, multi-floor Expedition campaigns, and resumable mid-run saves are not implemented. Best scores currently share one leaderboard across modes.
+This is the playable PC-first campaign and initial randomized Expedition build. It includes the full authored map, all six enemy/source families, the three-phase Warden, objectives, checkpoint recovery, results, map, sound effects, and settings. The original specification's complete mobile gesture/accessibility acceptance suite, daily mode, multi-floor Expedition campaigns, and resumable mid-run saves are not implemented. Best scores currently share one leaderboard across modes.

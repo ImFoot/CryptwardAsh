@@ -1,11 +1,33 @@
 import {validateDungeon,type DungeonDefinition,type DungeonObject} from './dungeon.ts';
 type Template={id:string;width:number;height:number;roles:string[]};
-export const GENERATOR_VERSION='ashvault-pc-1.0';
+export const GENERATOR_VERSION='ashvault-pc-1.1';
+
+function transformLayout(d:DungeonDefinition,variant:number){
+ const size=d.width;
+ const transform=(x:number,y:number)=>{
+  if(variant>=4)x=size-1-x;
+  for(let turns=0;turns<variant%4;turns++)[x,y]=[size-1-y,x];
+  return [x,y] as const;
+ };
+ for(const key of ['ground','collision','zones'] as const){
+  const source=d[key],target=new Array<number>(source.length);
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++){const [nx,ny]=transform(x,y);target[ny*size+nx]=source[y*size+x];}
+  d[key]=target;
+ }
+ for(const o of d.objects){const [x,y]=transform(Math.floor(o.x/32),Math.floor(o.y/32));o.x=x*32+16;o.y=y*32+16;}
+}
+
 export function generateDungeon(seed:number,catalog:{templates:Template[]}):DungeonDefinition{
- let state=seed|0;const random=()=>{state=(state+0x6d2b79f5)|0;let t=Math.imul(state^state>>>15,1|state);t^=t+Math.imul(t^t>>>7,61|t);return ((t^t>>>14)>>>0)/4294967296;};
+ const normalizedSeed=seed|0;
+ let state=normalizedSeed;const random=()=>{state=(state+0x6d2b79f5)|0;let t=Math.imul(state^state>>>15,1|state);t^=t+Math.imul(t^t>>>7,61|t);return ((t^t>>>14)>>>0)/4294967296;};
  const pick=(role:string)=>{const choices=catalog.templates.filter(t=>t.roles.includes(role));if(!choices.length)throw Error('Missing template role '+role);return choices[Math.floor(random()*choices.length)];};
- const w=84,h=84,d:DungeonDefinition={schemaVersion:1,id:`expedition-${GENERATOR_VERSION}-${seed|0}`,displayName:'Ashvault Expedition',source:'generated',seed:seed|0,width:w,height:h,tileSize:32,ground:new Array(w*h).fill(23),collision:new Array(w*h).fill(1),zones:new Array(w*h).fill(0),objects:[]};
+ const w=84,h=84,d:DungeonDefinition={schemaVersion:1,id:`expedition-${GENERATOR_VERSION}-${normalizedSeed}`,displayName:'Ashvault Expedition',source:'generated',seed:normalizedSeed,width:w,height:h,tileSize:32,ground:new Array(w*h).fill(23),collision:new Array(w*h).fill(1),zones:new Array(w*h).fill(0),objects:[]};
  const specs:[string,number,number,number][]=[['start',0,1,1],['combat',1,1,2],['objective',1,0,3],['junction',2,1,4],['combat',2,2,5],['combat',3,1,6],['boss_approach',3,2,7],['boss',3,3,8],['treasure',0,0,3],['checkpoint',2,0,4]];
+ // The progression graph stays stable, but symmetric branches trade places by
+ // seed so landmarks and room footprints do not always occupy the same slots.
+ const swapSlots=(a:number,b:number)=>{[specs[a][1],specs[b][1]]=[specs[b][1],specs[a][1]];[specs[a][2],specs[b][2]]=[specs[b][2],specs[a][2]];};
+ if((normalizedSeed>>>3)&1)swapSlots(2,8);
+ if((normalizedSeed>>>4)&1)swapSlots(4,9);
  const rooms=specs.map(([role,gx,gy,zone],id)=>{const t=role==='boss'?catalog.templates.find(t=>t.id==='bellows_arena')!:pick(role);return {id,t,zone,cx:gx*20+12,cy:gy*20+12,x:gx*20+12-Math.floor(t.width/2),y:gy*20+12-Math.floor(t.height/2)};});
  const carve=(x:number,y:number,zone:number)=>{const i=y*w+x;d.collision[i]=0;d.ground[i]=[1,2,3,7][Math.floor(random()*4)];d.zones[i]=zone;};
  const edges=[[0,1],[1,2],[2,8],[8,0],[1,3],[3,9],[3,4],[3,5],[5,6],[6,7]];
@@ -26,7 +48,11 @@ export function generateDungeon(seed:number,catalog:{templates:Template[]}):Dung
  center(7,'boss_spawn','boss',{family:'bellows_warden'},0,0);center(7,'exit_portal','exit',{requires:'boss_defeated'},5,2);
  center(8,'secret_wall','secret',{reveals:'treasure_cache'},-2,0);center(8,'treasure_cache','chest',{contents:'score_relic,health_tonic_large'},0,0);center(9,'checkpoint_02','checkpoint');
  for(const [i,f,count]of [[1,'ash_rat',3],[2,'bonebound',2],[3,'bonebound',3],[4,'bonebound',4],[5,'cinder_acolyte',3],[6,'furnace_brute',1]] as const){center(i,'encounter_'+i,'enemy_group',{family:f,count,activationRadius:224},-2,1);center(i,'tonic_'+i,'pickup',{item:random()>.5?'health_tonic_large':'ember_charge'},-3,3);}
- center(0,'pickup_01','pickup',{item:'coin_pile'},2,2);validateDungeon(d);validateProgression(d);return d;
+ center(0,'pickup_01','pickup',{item:'coin_pile'},2,2);
+ // Low seed bits select all eight rotations/reflections so independently
+ // randomized runs produce visibly different floor silhouettes.
+ transformLayout(d,normalizedSeed&7);
+ validateDungeon(d);validateProgression(d);return d;
 }
 export function validateProgression(d:DungeonDefinition){
  const w=d.width,spawn=d.objects.find(o=>o.type==='spawn')!;const initial=Math.floor(spawn.y/32)*w+Math.floor(spawn.x/32);
