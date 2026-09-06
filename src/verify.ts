@@ -9,12 +9,15 @@ export function installVerification(s:any){
   check(s.solid(20,20),'Stone walls block movement');check(s.solid(1104,752),'Furnace Cross locked before key');check(s.solid(1744,1328),'Boss arena locked before three seals');
   const reach=(target:any,range=24)=>{const w=s.d.width,h=s.d.height,start=Math.floor(s.y/32)*w+Math.floor(s.x/32);const queue=[start],seen=new Set([start]);for(let q=0;q<queue.length;q++){const i=queue[q],x=(i%w)*32+16,y=Math.floor(i/w)*32+16;if(Math.hypot(x-target.x,y-target.y)<range)return true;for(const [nx,ny]of [[x-32,y],[x+32,y],[x,y-32],[x,y+32]]){const n=Math.floor(ny/32)*w+Math.floor(nx/32);if(nx>=0&&ny>=0&&nx<w*32&&ny<h*32&&!seen.has(n)&&s.canMove(nx,ny)){seen.add(n);queue.push(n);}}}return false;};
   const obj=(name:string)=>s.objects.find((o:any)=>o.name===name);
+  check(!obj('door_rat_run').sprite,'Open passage has no freestanding arch');
   check(reach(obj('key_brass_01')),'Brass key reachable before gate');check(reach(obj('seal_shard_a')),'First shard physically reachable');
   const nest=s.enemies.find((e:any)=>e.home?.name==='nest_rat_run');s.damageEnemy(nest,95);check(s.nests===1&&obj('nest_rat_run').done,'Destroyed furnace permanently stops its source');s.pick(obj('seal_shard_a'));check(s.shards===1,'First shard collected after furnace destruction');
   s.pick(obj('key_brass_01'));check(s.keys===1,'Brass key added to inventory');
   s.active=true;s.x=912;s.y=752;s.interact();check(s.furnaceOpen&&s.keys===0,'Brass gate opens and consumes key');
   check(reach(obj('seal_shard_b')),'Barracks shard reachable through unlocked gate');check(reach(obj('lever_gallery')),'Gallery lever reachable');
-  s.pick(obj('seal_shard_b'));s.pick(obj('seal_shard_c'));check(s.shards===2,'Gallery shard requires its lever');s.x=1776;s.y=624;s.interact();s.pick(obj('seal_shard_c'));check(s.shards===3,'Gallery lever releases third shard');
+  const gallery=obj('seal_shard_c');check(s.solid(gallery.x,gallery.y)&&!s.canMove(gallery.x,gallery.y)&&gallery.cage.visible,'Gallery cage visibly blocks movement before lever');
+  const refill=s.objects.find((o:any)=>o.properties.item==='teal_mana_shard');check(refill.sprite.texture.key==='ember_charge','Ember refill has a distinct icon');
+  s.pick(obj('seal_shard_b'));s.pick(obj('seal_shard_c'));check(s.shards===2,'Gallery shard requires its lever');s.x=1776;s.y=624;s.interact();check(!s.solid(gallery.x,gallery.y)&&!gallery.cage.visible,'Lever removes cage and collision');s.pick(obj('seal_shard_c'));check(!gallery.label.visible,'Collected seal label disappears');s.pick(gallery);check(s.shards===3,'Gallery lever releases third shard');
   check(reach(obj('seal_gate'),80),'Seal gate interactable from outside boss arena');s.x=1680;s.y=1136;s.interact();check(s.gateOpen,'Three seals open boss gate');check(reach(obj('exit_portal')),'Boss arena and exit reachable after gate opens');
   s.x=1904;s.y=1328;s.interact();check(s.active,'Portal refuses exit while boss is alive');
   s.x=688;s.y=848;s.face=0;s.clock=10;s.burstAt=0;const ember=s.ember;const target=s.spawn('bonebound',s.x+30,s.y);s.burst();check(s.ember===ember-18&&target.hp===12,'Burst consumes 18 Ember and deals 30 damage');
