@@ -1,4 +1,15 @@
-# 0.3.0 build verification
+# 0.3.1 build verification
+
+Verified locally on September 6, 2026 (Pacific time).
+
+- TypeScript, production build, and GitHub Pages subpath build: passed.
+- All 16 automated tests and all 93 development browser integration checks passed.
+- Headless Microsoft Edge checks confirmed the smaller score updates, bars and ability cooldowns update, room changes do not announce names, objectives appear on pause, and the full map opens and closes. No browser errors were reported.
+- Gameplay layouts were visually reviewed at 1280 × 720 and 390 × 844, plus the mobile pause screen. Physical touch/gamepad acceptance was not repeated.
+
+Gameplay no longer shows the objective panel, furnace count, chapter/location text, timer, control legend, ability names, minimap heading, or exploration percentage. Room-entry and routine health/Ember pickup announcements are removed. Objectives, furnace progress, and elapsed time are available while paused; control help remains in settings. Essential meters, inventory, minimap, ability icons/keys, boss status, and contextual interaction/progression messages remain visible when needed.
+
+## Previous release: 0.3.0 build verification
 
 Verified locally on September 5, 2026 (Pacific time).
 
