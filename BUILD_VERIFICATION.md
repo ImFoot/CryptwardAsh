@@ -4,8 +4,8 @@ Verified locally on September 5, 2026.
 
 - TypeScript type check: passed.
 - Production build: passed; Phaser separated from the game bundle.
-- Seven automated data/generation tests: passed.
-- 10,000 generated seeds: validated for connectivity and progression; generation p95 approximately 2.35 ms on this laptop.
+- Eight automated data/generation tests: passed.
+- 10,000 generated floors: validated for connectivity and progression; generation p95 approximately 1.40 ms on this laptop.
 - Browser scene checks: campaign objectives, brass-key consumption, gate restrictions, lever requirement, boss/portal conditions, checkpoint persistence, pause behavior, 128 px/s movement, melee combat, wall collision, and the 24-enemy cap passed.
 - Three Expedition seeds exercised through actual scene interaction methods: 4701, -987, 731942.
 - Browser error log during scene checks: no errors or warnings.
